@@ -1,5 +1,18 @@
 let currentLang = 'en';
 
+function escapeHTML(str) {
+    if (!str) return "";
+    return str.replace(/[&<>'"]/g, 
+        tag => ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            "'": '&#39;',
+            '"': '&quot;'
+        }[tag]));
+}
+
+
 const STATS_API_URL = "https://script.google.com/macros/s/AKfycbxSVmFLli_w4m7312Qk1aGBNXbiiZ-8tF4mFq4Q9TjTgO5xwDQAIiM_b0tPsgKhoePC6A/exec";
 
 async function pingStatsApi(payload, modeKey) {
@@ -639,8 +652,8 @@ function setLanguage(lang) {
     }
 }
 namesNextBtn.addEventListener('click', () => {
-    myName = document.getElementById('your-name').value.trim() || 'Partner';
-    theirName = document.getElementById('partner-name').value.trim() || 'Partner';
+    myName = escapeHTML(document.getElementById('your-name').value.trim()) || 'Partner';
+    theirName = escapeHTML(document.getElementById('partner-name').value.trim()) || 'Partner';
     nameScreen.classList.remove('active');
     setTimeout(() => {
         nameScreen.classList.add('hidden');
