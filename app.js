@@ -55,7 +55,8 @@ async function loadStatistics() {
         const predNames = ['Commitment', 'Appreciation', 'Sex', 'Partner Sat.', 'No Conflict', 'Responsiveness', 'Investment', 'Support', 'Capitalization', 'Attachment'];
         
         for (let i = 0; i < 10; i++) {
-            let avgP = data.coupleTests > 0 ? (data.sumPred[i] / data.coupleTests).toFixed(1) : 0;
+            let totalTests = data.coupleTests + (data.singleTests || 0);
+            let avgP = totalTests > 0 ? (data.sumPred[i] / totalTests).toFixed(1) : 0;
             let width = (avgP / 5) * 100;
             predsHtml += `
                 <div class="breakdown-item">
@@ -786,7 +787,12 @@ async function showResults() {
 
     // Setup WhatsApp Button
     if (appMode === 'p1') {
-        pingStatsApi({ type: 'single' }, 'p1');
+        let preds = [];
+        for(let i=0; i<10; i++) {
+            let v = answers[i]; if(questions[i].reverse) v = 6 - v;
+            preds.push(v);
+        }
+        pingStatsApi({ type: 'single', preds: preds }, 'p1');
         waShareBtn.classList.remove('hidden');
         waShareBtn.textContent = trans.ui.waShareP1.replace('{partner}', theirName);
         const data = { mode: 'p1', nA: myName, nB: theirName, answers: answers, lang: currentLang, timestamp: Date.now() };

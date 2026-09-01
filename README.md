@@ -52,7 +52,10 @@ function doPost(e) {
     var raw = sheet.getRange("A1").getValue();
     var stats = raw ? JSON.parse(raw) : { singleTests: 0, coupleTests: 0, sumScore: 0, sumPred: [0,0,0,0,0,0,0,0,0,0], catHigh: 0, catMod: 0, catGrow: 0, catNeeds: 0 };
     var payload = JSON.parse(e.postData.contents);
-    if (payload.type === 'single') stats.singleTests += 1;
+    if (payload.type === 'single') {
+      stats.singleTests += 1;
+      for(var i=0; i<10; i++) stats.sumPred[i] += payload.preds[i];
+    }
     else if (payload.type === 'couple') {
       stats.coupleTests += 1;
       stats.sumScore += payload.score;
