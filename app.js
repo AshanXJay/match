@@ -121,7 +121,7 @@ const translations = {
             priv2Title: "Self-Destructing Links:",
             priv2Desc: "Generated links automatically expire 1 hour after creation.",
             priv3Title: "Device Locking:",
-            priv3Desc: "Once a link is opened, it binds to that browser. If a 3rd party tries to open the same link, they will be blocked.",
+            priv3Desc: "Once generated, links are locked to prevent the sender from accidentally overwriting their own results.",
             priv4Title: "No Database or Backend Servers:",
             priv4Desc: "We have absolutely zero backend servers to store or process your personal data. The global dashboard only securely tracks anonymous scores.",
             breakdownTitle: "Top 10 Scientific Predictors",
@@ -234,7 +234,7 @@ const translations = {
             priv2Title: "ස්වයංක්‍රීයව මැකීයාම:",
             priv2Desc: "සබැඳි (Links) පැය 1කට පසු ස්වයංක්‍රීයව කල් ඉකුත් වේ.",
             priv3Title: "උපාංගය අගුලු දැමීම:",
-            priv3Desc: "සබැඳිය විවෘත කළ පසු එය එම බ්‍රවුසරයට අගුලු වැටේ. වෙනත් අයෙකුට එය විවෘත කළ නොහැක.",
+            priv3Desc: "යවන්නා විසින් තමන්ගේම ප්‍රතිඵල අහම්බෙන් මකා දැමීම වැළැක්වීමට සබැඳි අගුලු දමා ඇත.",
             priv4Title: "දත්ත ගබඩා හෝ පසුපෙළ (Backend) සේවාදායක නැත:",
             priv4Desc: "ඔබගේ පෞද්ගලික දත්ත ගබඩා කිරීමට හෝ සැකසීමට අපට කිසිදු backend සේවාදායකයක් (servers) නොමැත. අපගේ ගෝලීය දත්ත පුවරුව නිර්නාමික ලකුණු පමණක් ආරක්ෂිතව නිරීක්ෂණය කරයි.",
             privacyGuarantee: "🔒 100% පුද්ගලිකයි: සංකේතනය කර ඇත. සබැඳි පැය 1කට පසු විනාශ වන අතර ඔබේ උපාංගයට පමණක් සීමා වේ.",
@@ -348,7 +348,7 @@ const translations = {
             priv2Title: "தானாக அழியும் இணைப்புகள்:",
             priv2Desc: "இணைப்புகள் 1 மணிநேரத்திற்குப் பிறகு காலாவதியாகும்.",
             priv3Title: "சாதனப் பூட்டு:",
-            priv3Desc: "இணைப்பைத் திறந்தவுடன் அது அந்த உலாவியுடன் பிணைக்கப்படும். வேறு யாரும் திறக்க முடியாது.",
+            priv3Desc: "தங்கள் முடிவுகளை அனுப்புபவர் தற்செயலாக மாற்றுவதைத் தடுக்க இணைப்புகள் பூட்டப்பட்டுள்ளன.",
             priv4Title: "தரவுத்தளம் அல்லது பின்தள (Backend) சேவையகங்கள் இல்லை:",
             priv4Desc: "உங்கள் தனிப்பட்ட தரவை சேமிக்கவோ அல்லது கையாளவோ எங்களிடம் எந்த பின்தள சேவையகங்களும் (servers) இல்லை. உலகளாவிய டாஷ்போர்டு அநாமதேய மதிப்பெண்களை மட்டுமே பாதுகாப்பாகக் கண்காணிக்கிறது.",
             breakdownTitle: "முக்கிய 10 அறிவியல் காரணிகள்",
@@ -545,21 +545,22 @@ window.onload = async () => {
                     return;
                 }
             }
-            // Validate Device Isolation
+            // Prevent sender from opening their own link
+            let genLinks = JSON.parse(localStorage.getItem('match_generated_links') || '[]');
+            if (decrypted.timestamp && genLinks.includes(decrypted.timestamp)) {
+                let blockMsg = currentLang === 'si' ? "මෙම සබැඳිය ඔබගේ සහකරු සඳහා වේ! ඔබ දැනටමත් ඔබගේ කොටස අවසන් කර ඇත." :
+                               currentLang === 'ta' ? "இந்த இணைப்பு உங்கள் துணைவருக்கானது! நீங்கள் ஏற்கனவே உங்கள் பகுதியை முடித்துவிட்டீர்கள்." :
+                               "This link is meant for your partner! You've already completed your part.";
+                alert(blockMsg);
+                window.location.href = window.location.origin + window.location.pathname;
+                return;
+            }
+            
+            // Set role based on link mode
             if (decrypted.mode === 'p1') {
-                if (matchRole === 'A') {
-                    alert("This link is meant for your partner! You've already completed your part.");
-                    window.location.href = window.location.origin + window.location.pathname;
-                    return;
-                }
                 matchRole = 'B';
                 localStorage.setItem('match_role', 'B');
             } else if (decrypted.mode === 'final') {
-                if (matchRole === 'B') {
-                    alert("This link is meant for Partner A! You've already completed your part.");
-                    window.location.href = window.location.origin + window.location.pathname;
-                    return;
-                }
                 matchRole = 'A';
                 localStorage.setItem('match_role', 'A');
             }
@@ -763,7 +764,13 @@ async function showResults() {
         pingStatsApi({ type: 'single', preds: preds }, 'p1');
         waShareBtn.classList.remove('hidden');
         waShareBtn.textContent = trans.ui.waShareP1.replace('{partner}', theirName);
-        const data = { mode: 'p1', nA: myName, nB: theirName, answers: answers, lang: currentLang, timestamp: Date.now() };
+        const linkId = Date.now();
+        const data = { mode: 'p1', nA: myName, nB: theirName, answers: answers, lang: currentLang, timestamp: linkId };
+        
+        // Save generated link ID to block sender from opening it
+        let genLinks = JSON.parse(localStorage.getItem('match_generated_links') || '[]');
+        genLinks.push(linkId);
+        localStorage.setItem('match_generated_links', JSON.stringify(genLinks));
         const key = await generateKey();
         const encrypted = await encryptData(data, key);
         const keyStr = await exportKey(key);
@@ -796,7 +803,12 @@ async function showResults() {
         pingStatsApi({ type: 'couple', score: finalScore, preds: preds, cat: tierKey }, 'p2');
         waShareBtn.classList.remove('hidden');
         waShareBtn.textContent = trans.ui.waShareP2.replace('{partner}', theirName);
-        const data = { mode: 'final', p1: p1Data, p2: p2Data, lang: currentLang, timestamp: Date.now() };
+        const linkId = Date.now();
+        const data = { mode: 'final', p1: p1Data, p2: p2Data, lang: currentLang, timestamp: linkId };
+        
+        let genLinks = JSON.parse(localStorage.getItem('match_generated_links') || '[]');
+        genLinks.push(linkId);
+        localStorage.setItem('match_generated_links', JSON.stringify(genLinks));
         const key = await generateKey();
         const encrypted = await encryptData(data, key);
         const keyStr = await exportKey(key);
