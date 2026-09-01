@@ -672,18 +672,35 @@ function generateDyadicAdvice(ans1, ans2, name1, name2) {
     // Advice for Partner 2 (based on Partner 1's lowest score)
     let adv2 = adviceStrings[p1LowestIdx].replace('{name}', name2).replace('{partner}', name1);
     
-    document.getElementById('adv-name1').textContent = name1 + ":";
-    document.getElementById('adv-text1').textContent = adv1;
+    const dyadicItem1 = document.getElementById('dyadic-item-1');
+    const dyadicItem2 = document.getElementById('dyadic-item-2');
     
-    document.getElementById('adv-name2').textContent = name2 + ":";
-    document.getElementById('adv-text2').textContent = adv2;
+    if (appMode === 'p2') {
+        // Show ONLY advice for Partner 2
+        dyadicItem1.classList.add('hidden');
+        dyadicItem2.classList.remove('hidden');
+        document.getElementById('adv-name2').textContent = name2 + ":";
+        document.getElementById('adv-text2').textContent = adv2;
+    } else if (appMode === 'final') {
+        // Show ONLY advice for Partner 1
+        dyadicItem2.classList.add('hidden');
+        dyadicItem1.classList.remove('hidden');
+        document.getElementById('adv-name1').textContent = name1 + ":";
+        document.getElementById('adv-text1').textContent = adv1;
+    } else {
+        dyadicItem1.classList.remove('hidden');
+        dyadicItem2.classList.remove('hidden');
+        document.getElementById('adv-name1').textContent = name1 + ":";
+        document.getElementById('adv-text1').textContent = adv1;
+        document.getElementById('adv-name2').textContent = name2 + ":";
+        document.getElementById('adv-text2').textContent = adv2;
+    }
 }
 
 function buildBreakdownUI() {
     const bdContainer = document.getElementById('breakdown-container');
     const bdHeader = document.getElementById('bd-header');
     
-    // Clear existing breakdown items (keep header)
     bdContainer.innerHTML = '';
     bdContainer.appendChild(bdHeader);
     
@@ -691,51 +708,33 @@ function buildBreakdownUI() {
     
     setTimeout(() => {
         for (let i = 0; i < 10; i++) {
-            // Calculate percentages
-            let val1 = appMode === 'p1' ? answers[i] : p1Data.answers[i];
-            if (questions[i].reverse) val1 = 6 - val1;
-            let pct1 = Math.round(((val1 - 1) / 4) * 100);
+            let myAns = 0;
             
-            let pct2 = null;
-            if (appMode === 'p2' || appMode === 'final') {
-                let val2 = p2Data.answers[i];
-                if (questions[i].reverse) val2 = 6 - val2;
-                pct2 = Math.round(((val2 - 1) / 4) * 100);
+            if (appMode === 'p1') {
+                myAns = answers[i];
+            } else if (appMode === 'p2') {
+                myAns = p2Data.answers[i];
+            } else if (appMode === 'final') {
+                myAns = p1Data.answers[i];
             }
             
-            // Build UI
+            if (questions[i].reverse) myAns = 6 - myAns;
+            let pct = Math.round(((myAns - 1) / 4) * 100);
+            
             const item = document.createElement('div');
             item.className = 'breakdown-item';
-            
             const titleStr = translations[currentLang].ui[predKeys[i]];
+            let color = getColorForPct(pct);
             
-            let html = `<div class="breakdown-header"><span class="bd-title">${titleStr}</span></div>`;
-            
-            // P1 Bar
-            let p1Color = getColorForPct(pct1);
-            let nameA = (appMode === 'p1') ? myName : p1Data.nA;
-            html += `
+            let html = `
+                <div class="breakdown-header"><span class="bd-title">${titleStr}</span></div>
                 <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:2px; color:#94a3b8;">
-                    <span>${nameA}</span><span style="color:${p1Color.p}; font-weight:bold;">${pct1}%</span>
+                    <span>${myName}</span><span style="color:${color.p}; font-weight:bold;">${pct}%</span>
                 </div>
-                <div class="bd-bar-bg" style="margin-bottom: ${pct2 !== null ? '8px' : '0'};">
-                    <div class="bd-bar" style="width: ${pct1}%; background: linear-gradient(90deg, ${p1Color.p}, ${p1Color.s});"></div>
+                <div class="bd-bar-bg">
+                    <div class="bd-bar" style="width: ${pct}%; background: linear-gradient(90deg, ${color.p}, ${color.s});"></div>
                 </div>
             `;
-            
-            // P2 Bar (if couples mode)
-            if (pct2 !== null) {
-                let p2Color = getColorForPct(pct2);
-                let nameB = (appMode === 'p1') ? theirName : p1Data.nB;
-                html += `
-                    <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:2px; color:#94a3b8;">
-                        <span>${nameB}</span><span style="color:${p2Color.p}; font-weight:bold;">${pct2}%</span>
-                    </div>
-                    <div class="bd-bar-bg">
-                        <div class="bd-bar" style="width: ${pct2}%; background: linear-gradient(90deg, ${p2Color.p}, ${p2Color.s});"></div>
-                    </div>
-                `;
-            }
             
             item.innerHTML = html;
             bdContainer.appendChild(item);
