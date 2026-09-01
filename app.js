@@ -12,14 +12,14 @@ async function pingStatsApi(payload, modeKey) {
             headers: { 'Content-Type': 'text/plain' } // avoids CORS preflight
         });
         localStorage.setItem('match_pinged_' + modeKey, 'true');
-    } catch(e) { console.log('Stats ping failed', e); }
+    } catch (e) { console.log('Stats ping failed', e); }
 }
 
 async function loadStatistics() {
     const statsBtn = document.getElementById('show-stats-btn');
     const statsScreen = document.getElementById('stats-screen');
     const langScreen = document.getElementById('lang-screen');
-    
+
     langScreen.classList.remove('active');
     setTimeout(() => {
         langScreen.classList.add('hidden');
@@ -27,33 +27,33 @@ async function loadStatistics() {
         void statsScreen.offsetWidth;
         statsScreen.classList.add('active');
     }, 300);
-    
+
     if (STATS_API_URL === "https://script.google.com/macros/s/AKfycbxSVmFLli_w4m7312Qk1aGBNXbiiZ-8tF4mFq4Q9TjTgO5xwDQAIiM_b0tPsgKhoePC6A/exec" && false) {
         document.getElementById('stats-loading').innerHTML = '<p>Database not connected yet!</p>';
         return;
     }
-    
+
     try {
         let res = await fetch(STATS_API_URL);
         let data = await res.json();
-        
+
         document.getElementById('stats-loading').classList.add('hidden');
         document.getElementById('stats-content').classList.remove('hidden');
-        
+
         document.getElementById('stat-single').textContent = data.singleTests || 0;
         document.getElementById('stat-couple').textContent = data.coupleTests || 0;
-        
+
         let avgScore = data.coupleTests > 0 ? Math.round(data.sumScore / data.coupleTests) : 0;
         document.getElementById('stat-avg-score').textContent = avgScore;
-        
+
         document.getElementById('stat-cat-high').textContent = data.catHigh || 0;
         document.getElementById('stat-cat-mod').textContent = data.catMod || 0;
         document.getElementById('stat-cat-grow').textContent = data.catGrow || 0;
         document.getElementById('stat-cat-needs').textContent = data.catNeeds || 0;
-        
+
         let predsHtml = '';
         const predNames = ['Commitment', 'Appreciation', 'Sex', 'Partner Sat.', 'No Conflict', 'Responsiveness', 'Investment', 'Support', 'Capitalization', 'Attachment'];
-        
+
         for (let i = 0; i < 10; i++) {
             let totalTests = data.coupleTests + (data.singleTests || 0);
             let avgP = totalTests > 0 ? (data.sumPred[i] / totalTests) : 0;
@@ -71,8 +71,8 @@ async function loadStatistics() {
             `;
         }
         document.getElementById('stat-avg-preds').innerHTML = predsHtml;
-        
-    } catch(e) {
+
+    } catch (e) {
         document.getElementById('stats-loading').innerHTML = '<p>Failed to load statistics.</p>';
     }
 }
@@ -472,7 +472,7 @@ const questionText = document.getElementById('question-text');
 const optionsContainer = document.getElementById('options-container');
 const progressBar = document.getElementById('progress-bar');
 const waShareBtn = document.getElementById('wa-share-btn');
-document.getElementById('view-my-breakdown-btn').addEventListener('click', function() {
+document.getElementById('view-my-breakdown-btn').addEventListener('click', function () {
     this.classList.add('hidden');
     document.getElementById('breakdown-container').classList.remove('hidden');
 });
@@ -538,8 +538,8 @@ window.onload = async () => {
                 const ONE_HOUR = 60 * 60 * 1000;
                 if (Date.now() - decrypted.timestamp > ONE_HOUR) {
                     let expMsg = currentLang === 'si' ? "මෙම සබැඳිය කල් ඉකුත් වී ඇත (පැය 1කට පමණක් වලංගු වේ)." :
-                                 currentLang === 'ta' ? "இந்த இணைப்பு காலாவதியாகிவிட்டது (1 மணிநேரம் மட்டுமே செல்லுபடியாகும்)." :
-                                 "This link has expired for privacy reasons (valid for 1 hour).";
+                        currentLang === 'ta' ? "இந்த இணைப்பு காலாவதியாகிவிட்டது (1 மணிநேரம் மட்டுமே செல்லுபடியாகும்)." :
+                            "This link has expired for privacy reasons (valid for 1 hour).";
                     alert(expMsg);
                     window.location.href = window.location.origin + window.location.pathname;
                     return;
@@ -549,13 +549,13 @@ window.onload = async () => {
             let genLinks = JSON.parse(localStorage.getItem('match_generated_links') || '[]');
             if (decrypted.timestamp && genLinks.includes(decrypted.timestamp)) {
                 let blockMsg = currentLang === 'si' ? "මෙම සබැඳිය ඔබගේ සහකරු සඳහා වේ! ඔබ දැනටමත් ඔබගේ කොටස අවසන් කර ඇත." :
-                               currentLang === 'ta' ? "இந்த இணைப்பு உங்கள் துணைவருக்கானது! நீங்கள் ஏற்கனவே உங்கள் பகுதியை முடித்துவிட்டீர்கள்." :
-                               "This link is meant for your partner! You've already completed your part.";
+                    currentLang === 'ta' ? "இந்த இணைப்பு உங்கள் துணைவருக்கானது! நீங்கள் ஏற்கனவே உங்கள் பகுதியை முடித்துவிட்டீர்கள்." :
+                        "This link is meant for your partner! You've already completed your part.";
                 alert(blockMsg);
                 window.location.href = window.location.origin + window.location.pathname;
                 return;
             }
-            
+
             // Set role based on link mode
             if (decrypted.mode === 'p1') {
                 matchRole = 'B';
@@ -568,7 +568,7 @@ window.onload = async () => {
             localStorage.setItem('match_state', JSON.stringify(decrypted));
             window.history.replaceState({}, document.title, window.location.pathname);
             sessionData = decrypted;
-        } catch(e) {
+        } catch (e) {
             console.error("Decryption failed", e);
             alert("Invalid or broken link.");
             return;
@@ -590,9 +590,9 @@ window.onload = async () => {
             langScreen.classList.remove('active');
             langScreen.classList.add('hidden');
             let greeting = translations[currentLang].ui.greetingP2.replace('{nA}', theirName).replace('{nB}', myName);
-                        let privacyAssurance = currentLang === 'en' ? `🔒 Rest assured, ${theirName} cannot see your individual answers, and you won't see theirs either!` :
-                                   currentLang === 'si' ? `🔒 බිය නොවන්න, ${theirName} හට ඔබගේ තනි පිළිතුරු දැකිය නොහැකි අතර, ඔබටද ඔවුන්ගේ පිළිතුරු දැකිය නොහැක!` :
-                                   `🔒 கவலைப்பட வேண்டாம், ${theirName} உங்கள் தனிப்பட்ட பதில்களைக் காண முடியாது, நீங்களும் அவர்களின் பதில்களைக் காண முடியாது!`;
+            let privacyAssurance = currentLang === 'en' ? `🔒 Rest assured, ${theirName} cannot see your individual answers, and you won't see theirs either!` :
+                currentLang === 'si' ? `🔒 බිය නොවන්න, ${theirName} හට ඔබගේ තනි පිළිතුරු දැකිය නොහැකි අතර, ඔබටද ඔවුන්ගේ පිළිතුරු දැකිය නොහැක!` :
+                    `🔒 கவலைப்பட வேண்டாம், ${theirName} உங்கள் தனிப்பட்ட பதில்களைக் காண முடியாது, நீங்களும் அவர்களின் பதில்களைக் காண முடியாது!`;
             document.querySelector('#intro-screen .intro-card').innerHTML = `<p>${greeting}</p><p>${translations[currentLang].ui.introDesc2}</p><p style="font-size: 0.85rem; color: var(--primary); margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;">${privacyAssurance}</p>`;
             introScreen.classList.remove('hidden');
             introScreen.classList.add('active');
@@ -613,7 +613,7 @@ window.onload = async () => {
 function setLanguage(lang) {
     currentLang = lang;
     questions = translations[lang].questions;
-    if(answers.length === 0) answers = new Array(questions.length).fill(null);
+    if (answers.length === 0) answers = new Array(questions.length).fill(null);
     // Update static i18n
     const elements = document.querySelectorAll('[data-i18n]');
     elements.forEach(el => {
@@ -633,8 +633,8 @@ function setLanguage(lang) {
     }
 }
 namesNextBtn.addEventListener('click', () => {
-    myName = document.getElementById('your-name').value.trim() || 'Partner A';
-    theirName = document.getElementById('partner-name').value.trim() || 'Partner B';
+    myName = document.getElementById('your-name').value.trim() || 'Partner';
+    theirName = document.getElementById('partner-name').value.trim() || 'Partner';
     nameScreen.classList.remove('active');
     setTimeout(() => {
         nameScreen.classList.add('hidden');
@@ -741,7 +741,7 @@ async function showResults() {
     else if (finalScore >= 60) { applyTheme(colorPalettes.mod); tierKey = 'mod'; }
     else if (finalScore >= 40) { applyTheme(colorPalettes.grow); tierKey = 'grow'; }
     else { applyTheme(colorPalettes.needs); tierKey = 'needs'; }
-    if(appMode !== 'final') {
+    if (appMode !== 'final') {
         quizScreen.classList.remove('active');
         quizScreen.classList.add('hidden');
     }
@@ -757,8 +757,8 @@ async function showResults() {
     // Setup WhatsApp Button
     if (appMode === 'p1') {
         let preds = [];
-        for(let i=0; i<10; i++) {
-            let v = answers[i]; if(questions[i].reverse) v = 6 - v;
+        for (let i = 0; i < 10; i++) {
+            let v = answers[i]; if (questions[i].reverse) v = 6 - v;
             preds.push(v);
         }
         pingStatsApi({ type: 'single', preds: preds }, 'p1');
@@ -766,7 +766,7 @@ async function showResults() {
         waShareBtn.textContent = trans.ui.waShareP1.replace('{partner}', theirName);
         const linkId = Date.now();
         const data = { mode: 'p1', nA: myName, nB: theirName, answers: answers, lang: currentLang, timestamp: linkId };
-        
+
         // Save generated link ID to block sender from opening it
         let genLinks = JSON.parse(localStorage.getItem('match_generated_links') || '[]');
         genLinks.push(linkId);
@@ -782,9 +782,9 @@ async function showResults() {
         modalWaBtn.textContent = trans.ui.modalShareBtn.replace('{partner}', theirName);
         modalWaBtn.href = waShareBtn.href;
         document.getElementById('modal-close-btn').style.display = 'inline-block';
-        let descStr = currentLang === 'en' ? `Send this to <strong>${theirName}</strong> to discover your combined score and see what areas you both can grow in!<br><br><span style="font-size:0.85rem; color:var(--primary);">🔒 Don't worry, ${theirName} will NOT see your individual answers or stats!</span>` : 
-                      currentLang === 'si' ? `ඔබ දෙදෙනාගේම ප්‍රතිඵල දැනගැනීමට මෙය <strong>${theirName}</strong> වෙත යවන්න!<br><br><span style="font-size:0.85rem; color:var(--primary);">🔒 බිය නොවන්න, ${theirName} හට ඔබගේ තනි පිළිතුරු හෝ ප්‍රතිඵල දැකිය නොහැක!</span>` : 
-                      `உங்கள் இருவரின் முடிவுகளையும் காண இதை <strong>${theirName}</strong> -க்கு அனுப்பவும்!<br><br><span style="font-size:0.85rem; color:var(--primary);">🔒 கவலைப்பட வேண்டாம், ${theirName} உங்கள் தனிப்பட்ட பதில்களைக் காண முடியாது!</span>`;
+        let descStr = currentLang === 'en' ? `Send this to <strong>${theirName}</strong> to discover your combined score and see what areas you both can grow in!<br><br><span style="font-size:0.85rem; color:var(--primary);">🔒 Don't worry, ${theirName} will NOT see your individual answers or stats!</span>` :
+            currentLang === 'si' ? `ඔබ දෙදෙනාගේම ප්‍රතිඵල දැනගැනීමට මෙය <strong>${theirName}</strong> වෙත යවන්න!<br><br><span style="font-size:0.85rem; color:var(--primary);">🔒 බිය නොවන්න, ${theirName} හට ඔබගේ තනි පිළිතුරු හෝ ප්‍රතිඵල දැකිය නොහැක!</span>` :
+                `உங்கள் இருவரின் முடிவுகளையும் காண இதை <strong>${theirName}</strong> -க்கு அனுப்பவும்!<br><br><span style="font-size:0.85rem; color:var(--primary);">🔒 கவலைப்பட வேண்டாம், ${theirName} உங்கள் தனிப்பட்ட பதில்களைக் காண முடியாது!</span>`;
         document.getElementById('modal-desc').innerHTML = descStr;
         setTimeout(() => {
             const modal = document.getElementById('couples-modal');
@@ -792,12 +792,12 @@ async function showResults() {
             void modal.offsetWidth;
             modal.classList.add('active');
         }, 1200);
-    } 
+    }
     else if (appMode === 'p2') {
         let preds = [];
-        for(let i=0; i<10; i++) {
-            let v1 = p1Data.answers[i]; if(questions[i].reverse) v1 = 6 - v1;
-            let v2 = p2Data.answers[i]; if(questions[i].reverse) v2 = 6 - v2;
+        for (let i = 0; i < 10; i++) {
+            let v1 = p1Data.answers[i]; if (questions[i].reverse) v1 = 6 - v1;
+            let v2 = p2Data.answers[i]; if (questions[i].reverse) v2 = 6 - v2;
             preds.push((v1 + v2) / 2);
         }
         pingStatsApi({ type: 'couple', score: finalScore, preds: preds, cat: tierKey }, 'p2');
@@ -805,7 +805,7 @@ async function showResults() {
         waShareBtn.textContent = trans.ui.waShareP2.replace('{partner}', theirName);
         const linkId = Date.now();
         const data = { mode: 'final', p1: p1Data, p2: p2Data, lang: currentLang, timestamp: linkId };
-        
+
         let genLinks = JSON.parse(localStorage.getItem('match_generated_links') || '[]');
         genLinks.push(linkId);
         localStorage.setItem('match_generated_links', JSON.stringify(genLinks));
@@ -821,13 +821,13 @@ async function showResults() {
         modalWaBtn.href = waShareBtn.href;
         // Hide close button
         document.getElementById('modal-close-btn').style.display = 'none';
-        let titleStr = currentLang === 'en' ? `Send to ${theirName} to Unlock!` : 
-                       currentLang === 'si' ? `ප්‍රතිඵල බැලීමට ${theirName} වෙත යවන්න!` : 
-                       `${theirName} -க்கு அனுப்பி முடிவுகளைப் பார்க்கவும்!`;
+        let titleStr = currentLang === 'en' ? `Send to ${theirName} to Unlock!` :
+            currentLang === 'si' ? `ප්‍රතිඵල බැලීමට ${theirName} වෙත යවන්න!` :
+                `${theirName} -க்கு அனுப்பி முடிவுகளைப் பார்க்கவும்!`;
         document.querySelector('#couples-modal h2').innerHTML = titleStr;
-        let descStr = currentLang === 'en' ? `You've finished! To reveal your relationship breakdown and advice, you MUST send the Final Results back to <strong>${theirName}</strong>.` : 
-                      currentLang === 'si' ? `ඔබේ ඇගයීම අවසන්! ඔබේ ප්‍රතිඵල සහ උපදෙස් බැලීමට, අවසාන ප්‍රතිඵල <strong>${theirName}</strong> වෙත යැවිය යුතුමයි.` : 
-                      `நீங்கள் முடித்துவிட்டீர்கள்! உங்கள் முடிவுகள் மற்றும் ஆலோசனைகளைப் பார்க்க, இறுதி முடிவுகளை <strong>${theirName}</strong> -க்கு அனுப்ப வேண்டும்.`;
+        let descStr = currentLang === 'en' ? `You've finished! To reveal your relationship breakdown and advice, you MUST send the Final Results back to <strong>${theirName}</strong>.` :
+            currentLang === 'si' ? `ඔබේ ඇගයීම අවසන්! ඔබේ ප්‍රතිඵල සහ උපදෙස් බැලීමට, අවසාන ප්‍රතිඵල <strong>${theirName}</strong> වෙත යැවිය යුතුමයි.` :
+                `நீங்கள் முடித்துவிட்டீர்கள்! உங்கள் முடிவுகள் மற்றும் ஆலோசனைகளைப் பார்க்க, இறுதி முடிவுகளை <strong>${theirName}</strong> -க்கு அனுப்ப வேண்டும்.`;
         document.getElementById('modal-desc').innerHTML = descStr;
         setTimeout(() => {
             const modal = document.getElementById('couples-modal');
@@ -856,9 +856,9 @@ function generateDyadicAdvice(ans1, ans2, name1, name2) {
         let issues = [];
         let minScore = 999;
         let minIdx = 0;
-        for(let i=0; i<10; i++) {
-            let v = ans[i]; 
-            if(questions[i].reverse) v = 6 - v;
+        for (let i = 0; i < 10; i++) {
+            let v = ans[i];
+            if (questions[i].reverse) v = 6 - v;
             if (v < minScore) { minScore = v; minIdx = i; }
             // If the score is 3 or below (neutral or negative), it's a growth area
             if (v <= 3) {
@@ -906,7 +906,7 @@ function buildBreakdownUI() {
     const bdHeader = document.getElementById('bd-header');
     bdContainer.innerHTML = '';
     bdContainer.appendChild(bdHeader);
-    const predKeys = ['predCommitment','predAppreciation','predSex','predPartnerSat','predConflict','predResponsiveness','predInvestment','predSupport','predCapitalization','predAttachment'];
+    const predKeys = ['predCommitment', 'predAppreciation', 'predSex', 'predPartnerSat', 'predConflict', 'predResponsiveness', 'predInvestment', 'predSupport', 'predCapitalization', 'predAttachment'];
     setTimeout(() => {
         for (let i = 0; i < 10; i++) {
             let myAns = 0;
