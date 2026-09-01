@@ -44,7 +44,7 @@ async function loadStatistics() {
         document.getElementById('stat-couple').textContent = data.coupleTests || 0;
         
         let avgScore = data.coupleTests > 0 ? Math.round(data.sumScore / data.coupleTests) : 0;
-        document.getElementById('stat-avg-score').textContent = avgScore + '%';
+        document.getElementById('stat-avg-score').textContent = avgScore;
         
         document.getElementById('stat-cat-high').textContent = data.catHigh || 0;
         document.getElementById('stat-cat-mod').textContent = data.catMod || 0;
@@ -58,10 +58,13 @@ async function loadStatistics() {
             let avgP = data.coupleTests > 0 ? (data.sumPred[i] / data.coupleTests).toFixed(1) : 0;
             let width = (avgP / 5) * 100;
             predsHtml += `
-                <div style="margin-bottom: 5px;">
-                    <div style="display: flex; justify-content: space-between;"><span>${predNames[i]}</span><span>${avgP}</span></div>
-                    <div style="height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden;">
-                        <div style="height: 100%; width: ${width}%; background: linear-gradient(90deg, var(--primary), var(--secondary));"></div>
+                <div class="breakdown-item">
+                    <div class="breakdown-header"><span class="bd-title">${predNames[i]}</span></div>
+                    <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:2px; color:#94a3b8;">
+                        <span>Global Avg</span><span style="color:var(--primary); font-weight:bold;">${avgP}/5</span>
+                    </div>
+                    <div class="bd-bar-bg">
+                        <div class="bd-bar" style="width: ${width}%; background: linear-gradient(90deg, var(--primary), var(--secondary));"></div>
                     </div>
                 </div>
             `;
