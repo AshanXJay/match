@@ -259,9 +259,9 @@ const translations = {
             modalCloseBtn: "Just show my results",
             waShareP1: "{partner} -க்கு WhatsApp மூலம் பகிரவும் 💬",
             waShareP2: "இறுதி முடிவுகளை {partner} -க்கு அனுப்பவும் 💬",
-            waMsgP1: "ஹாய் {nB}, {nA} மதிப்பீட்டை முடித்துவிட்டார்! உங்கள் முறையைத் தொடங்க இங்கே கிளிக் செய்யவும்: {link}",
-            waMsgP2: "ஹாய் {nA}, {nB} மதிப்பீட்டை முடித்துவிட்டார்! இறுதி முடிவுகளைப் பார்க்க இங்கே கிளிக் செய்யவும்: {link}",
-            greetingP2: "ஹாய் {nB}! {nA} மதிப்பீட்டை முடித்துவிட்டார். இப்போது உங்கள் முறை!",
+            waMsgP1: "ஹாய் {nB}! நான் நமது உறவு குறித்து ஒரு மதிப்பீட்டை செய்தேன். உங்கள் பகுதியை இங்கே தொடங்குங்கள், அதன் மூலம் நமது Couples Score மற்றும் நாம் எதில் கவனம் செலுத்த வேண்டும் என்பதை அறியலாம்! {link}",
+            waMsgP2: "ஹாய் {nA}! நான் எனது பகுதியை முடித்துவிட்டேன். நமது இறுதி Couples Score மற்றும் நாம் மேம்படுத்த வேண்டிய பகுதிகளைப் பார்க்க இங்கே கிளிக் செய்யவும்! {link}",
+            greetingP2: "ஹாய் {nB}! 💕 {nA} உங்கள் உறவு பற்றி ஒரு மதிப்பீட்டை செய்துவிட்டு, உங்களையும் அதைச் செய்யச் சொல்லியுள்ளார்! உங்களது ஒட்டுமொத்த Couples Score-ஐப் பார்க்கத் தயாரா?",
             dyadicAdviceStrings: [
                 "{name}, {partner} எதிர்காலத்தைப் பற்றி சற்று சந்தேகமாக உள்ளார். வெளிப்படையாகப் பேசுங்கள்.", // 0
                 "{name}, {partner} போதிய பாராட்டு கிடைக்கவில்லை என உணர்கிறார். சிறிய விஷயங்களுக்கும் நன்றி கூறுங்கள்.", // 1
@@ -383,8 +383,7 @@ document.getElementById('modal-wa-btn').addEventListener('click', () => {
     setTimeout(() => modal.classList.add('hidden'), 400);
 });
 
-// --- E2E Encryption
- (Web Crypto API) ---
+// --- E2E Encryption (Web Crypto API) ---
 async function generateKey() {
     return await window.crypto.subtle.generateKey({ name: "AES-GCM", length: 256 }, true, ["encrypt", "decrypt"]);
 }
@@ -426,47 +425,82 @@ window.onload = async () => {
     const hashParams = new URLSearchParams(window.location.hash.substring(1));
     const keyString = hashParams.get('key');
     
+    let sessionData = null;
+    let matchRole = localStorage.getItem('match_role');
+    let savedState = localStorage.getItem('match_state');
+    
     if (urlParams.has('q') && keyString) {
         try {
             const key = await importKey(keyString);
             const decrypted = await decryptData(urlParams.get('q'), key);
             
+            // Validate Device Isolation
             if (decrypted.mode === 'p1') {
-                appMode = 'p2';
-                p1Data = decrypted;
-                myName = p1Data.nB;
-                theirName = p1Data.nA;
-                currentLang = p1Data.lang || 'en';
-                
-                // Skip Name screen, go straight to Intro with custom greeting
-                setLanguage(currentLang);
-                langScreen.classList.remove('active');
-                langScreen.classList.add('hidden');
-                
-                // Set custom intro greeting
-                let greeting = translations[currentLang].ui.greetingP2.replace('{nA}', theirName).replace('{nB}', myName);
-                document.querySelector('#intro-screen .intro-card').innerHTML = `<p>${greeting}</p><p>${translations[currentLang].ui.introDesc2}</p>`;
-                
-                introScreen.classList.remove('hidden');
-                introScreen.classList.add('active');
+                if (matchRole === 'A') {
+                    alert("This link is meant for your partner! You've already completed your part.");
+                    window.location.href = window.location.origin + window.location.pathname;
+                    return;
+                }
+                matchRole = 'B';
+                localStorage.setItem('match_role', 'B');
                 
             } else if (decrypted.mode === 'final') {
-                appMode = 'final';
-                p1Data = decrypted.p1;
-                p2Data = decrypted.p2;
-                myName = p1Data.nA;
-                theirName = p1Data.nB;
-                currentLang = decrypted.lang || 'en';
-                
-                // Skip everything, go straight to Final Results
-                setLanguage(currentLang);
-                langScreen.classList.remove('active');
-                langScreen.classList.add('hidden');
-                showResults();
+                if (matchRole === 'B') {
+                    alert("This link is meant for Partner A! You've already completed your part.");
+                    window.location.href = window.location.origin + window.location.pathname;
+                    return;
+                }
+                matchRole = 'A';
+                localStorage.setItem('match_role', 'A');
             }
+            
+            // Save state for refresh resilience and clean URL
+            localStorage.setItem('match_state', JSON.stringify(decrypted));
+            window.history.replaceState({}, document.title, window.location.pathname);
+            sessionData = decrypted;
+            
         } catch(e) {
             console.error("Decryption failed", e);
             alert("Invalid or broken link.");
+            return;
+        }
+    } else if (savedState) {
+        sessionData = JSON.parse(savedState);
+    } else {
+        // Initial setup for A
+        localStorage.setItem('match_role', 'A');
+    }
+    
+    if (sessionData) {
+        if (sessionData.mode === 'p1') {
+            appMode = 'p2';
+            p1Data = sessionData;
+            myName = p1Data.nB;
+            theirName = p1Data.nA;
+            currentLang = p1Data.lang || 'en';
+            
+            setLanguage(currentLang);
+            langScreen.classList.remove('active');
+            langScreen.classList.add('hidden');
+            
+            let greeting = translations[currentLang].ui.greetingP2.replace('{nA}', theirName).replace('{nB}', myName);
+            document.querySelector('#intro-screen .intro-card').innerHTML = `<p>${greeting}</p><p>${translations[currentLang].ui.introDesc2}</p>`;
+            
+            introScreen.classList.remove('hidden');
+            introScreen.classList.add('active');
+            
+        } else if (sessionData.mode === 'final') {
+            appMode = 'final';
+            p1Data = sessionData.p1;
+            p2Data = sessionData.p2;
+            myName = p1Data.nA;
+            theirName = p1Data.nB;
+            currentLang = sessionData.lang || 'en';
+            
+            setLanguage(currentLang);
+            langScreen.classList.remove('active');
+            langScreen.classList.add('hidden');
+            showResults();
         }
     }
 };
@@ -687,9 +721,9 @@ async function showResults() {
         generateDyadicAdvice(p1Data.answers, p2Data.answers, myName, theirName);
     }
     
+    buildBreakdownUI();
     if (appMode === 'p1') {
         document.getElementById('breakdown-container').classList.remove('hidden');
-        buildBreakdownUI();
     } else {
         document.getElementById('breakdown-container').classList.add('hidden');
     }
@@ -701,46 +735,61 @@ function generateDyadicAdvice(ans1, ans2, name1, name2) {
     
     const adviceStrings = translations[currentLang].ui.dyadicAdviceStrings;
     
-    // Find where P1 scored lowest (meaning P1 is unhappy about this). We advise P2.
-    let p1LowestIdx = 0; let p1Min = 999;
-    // Find where P2 scored lowest. We advise P1.
-    let p2LowestIdx = 0; let p2Min = 999;
-    
-    for(let i=0; i<10; i++) {
-        let v1 = ans1[i]; if(questions[i].reverse) v1 = 6 - v1;
-        let v2 = ans2[i]; if(questions[i].reverse) v2 = 6 - v2;
+    function getAdviceList(ans, targetName, partnerName) {
+        let issues = [];
+        let minScore = 999;
+        let minIdx = 0;
         
-        if (v1 < p1Min) { p1Min = v1; p1LowestIdx = i; }
-        if (v2 < p2Min) { p2Min = v2; p2LowestIdx = i; }
+        for(let i=0; i<10; i++) {
+            let v = ans[i]; 
+            if(questions[i].reverse) v = 6 - v;
+            
+            if (v < minScore) { minScore = v; minIdx = i; }
+            
+            // If the score is 3 or below (neutral or negative), it's a growth area
+            if (v <= 3) {
+                issues.push(adviceStrings[i].replace('{name}', targetName).replace('{partner}', partnerName));
+            }
+        }
+        
+        // If there are no major issues (all 4s and 5s), just give the lowest scoring one
+        if (issues.length === 0) {
+            issues.push(adviceStrings[minIdx].replace('{name}', targetName).replace('{partner}', partnerName));
+        }
+        
+        let html = '<ul style="margin-top: 10px; padding-left: 20px;">';
+        issues.forEach(issue => {
+            html += `<li style="margin-bottom: 8px;">${issue}</li>`;
+        });
+        html += '</ul>';
+        return html;
     }
     
-    // Advice for Partner 1 (based on Partner 2's lowest score)
-    let adv1 = adviceStrings[p2LowestIdx].replace('{name}', name1).replace('{partner}', name2);
-    // Advice for Partner 2 (based on Partner 1's lowest score)
-    let adv2 = adviceStrings[p1LowestIdx].replace('{name}', name2).replace('{partner}', name1);
+    // Advice for Partner 1 is based on Partner 2's answers (ans2)
+    let adv1Html = getAdviceList(ans2, name1, name2);
+    // Advice for Partner 2 is based on Partner 1's answers (ans1)
+    let adv2Html = getAdviceList(ans1, name2, name1);
     
     const dyadicItem1 = document.getElementById('dyadic-item-1');
     const dyadicItem2 = document.getElementById('dyadic-item-2');
     
     if (appMode === 'p2') {
-        // Show ONLY advice for Partner 2
         dyadicItem1.classList.add('hidden');
         dyadicItem2.classList.remove('hidden');
         document.getElementById('adv-name2').textContent = name2 + ":";
-        document.getElementById('adv-text2').textContent = adv2;
+        document.getElementById('adv-text2').innerHTML = adv2Html;
     } else if (appMode === 'final') {
-        // Show ONLY advice for Partner 1
         dyadicItem2.classList.add('hidden');
         dyadicItem1.classList.remove('hidden');
         document.getElementById('adv-name1').textContent = name1 + ":";
-        document.getElementById('adv-text1').textContent = adv1;
+        document.getElementById('adv-text1').innerHTML = adv1Html;
     } else {
         dyadicItem1.classList.remove('hidden');
         dyadicItem2.classList.remove('hidden');
         document.getElementById('adv-name1').textContent = name1 + ":";
-        document.getElementById('adv-text1').textContent = adv1;
+        document.getElementById('adv-text1').innerHTML = adv1Html;
         document.getElementById('adv-name2').textContent = name2 + ":";
-        document.getElementById('adv-text2').textContent = adv2;
+        document.getElementById('adv-text2').innerHTML = adv2Html;
     }
 }
 
@@ -809,5 +858,7 @@ function animateScore(targetScore) {
 }
 
 function restartQuiz() {
+    localStorage.removeItem('match_role');
+    localStorage.removeItem('match_state');
     window.location.href = window.location.origin + window.location.pathname;
 }
