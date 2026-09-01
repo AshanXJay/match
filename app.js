@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
 const translations = {
     en: {
         ui: {
-            appTitle: "Relationship Matcher ✨",
+            appTitle: "Relationship Quality ✨",
             introDesc1: "Hey there! 👋 This fun little quiz is actually based on a massive machine learning study of over 11,000 couples by <em>Joel et al. (2020)</em>.",
             introDesc2: "Ready to discover the real strength of your relationship using some hard science? Let's dive in!",
             startBtn: "Let's go! 🚀",
@@ -236,6 +236,13 @@ const translations = {
             nameTitle: "ඔබව හඳුනාගනිමු!",
             nameDesc: "ඔබට හොඳම අත්දැකීම ලබා දීමට, ඔබේ නම් මොනවාද?",
             yourNameLabel: "ඔබේ නම",
+            privacyGuaranteeHeader: "🔒 දැඩි රහස්‍යතාව",
+            privacyDetails: `<ul style="font-size: 0.85rem; padding-left: 20px; line-height: 1.5; text-align: left; opacity: 0.9; margin:0;">
+                <li style="margin-bottom: 8px;"><strong>End-to-End Encrypted:</strong> ඔබගේ නම් සහ පිළිතුරු ඔබගේ උපාංගය තුළම සංකේතනය වේ (AES-GCM).</li>
+                <li style="margin-bottom: 8px;"><strong>ස්වයංක්‍රීයව මැකීයාම:</strong> සබැඳි (Links) පැය 1කට පසු ස්වයංක්‍රීයව කල් ඉකුත් වේ.</li>
+                <li style="margin-bottom: 8px;"><strong>උපාංගය අගුලු දැමීම:</strong> සබැඳිය විවෘත කළ පසු එය එම බ්‍රවුසරයට අගුලු වැටේ. වෙනත් අයෙකුට එය විවෘත කළ නොහැක.</li>
+                <li><strong>දත්ත ගබඩා හෝ පසුපෙළ (Backend) සේවාදායක නැත:</strong> ඔබගේ පෞද්ගලික දත්ත ගබඩා කිරීමට හෝ සැකසීමට අපට කිසිදු backend සේවාදායකයක් (servers) නොමැත. අපගේ ගෝලීය දත්ත පුවරුව නිර්නාමික ලකුණු පමණක් ආරක්ෂිතව නිරීක්ෂණය කරයි.</li>
+            </ul>`,
             partnerNameLabel: "සහකරුගේ/සහකාරියගේ නම",
             privacyGuarantee: "🔒 100% පුද්ගලිකයි: සංකේතනය කර ඇත. සබැඳි පැය 1කට පසු විනාශ වන අතර ඔබේ උපාංගයට පමණක් සීමා වේ.",
             breakdownTitle: "ප්‍රධාන විද්‍යාත්මක සාධක 10",

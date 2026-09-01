@@ -67,7 +67,14 @@
             
             <div class="intro-card" style="margin-top: 15px; margin-bottom: 20px; text-align: left;">
                 <h4 style="margin-bottom: 10px; color: var(--primary);" data-i18n="privacyGuaranteeHeader">🔒 Ironclad Privacy</h4>
-                <div data-i18n="privacyDetails"></div>
+                <div data-i18n="privacyDetails">
+                    <ul style="font-size: 0.85rem; padding-left: 20px; line-height: 1.5; text-align: left; opacity: 0.9; margin:0;">
+                        <li style="margin-bottom: 8px;"><strong>End-to-End Encrypted:</strong> Your names and answers are encrypted locally on your device (AES-GCM). The server cannot read them.</li>
+                        <li style="margin-bottom: 8px;"><strong>Self-Destructing Links:</strong> Generated links automatically expire 1 hour after creation.</li>
+                        <li style="margin-bottom: 8px;"><strong>Device Locking:</strong> Once a link is opened, it binds to that browser. If a 3rd party tries to open the same link, they will be blocked.</li>
+                        <li><strong>No Database or Backend Servers:</strong> We have absolutely zero backend servers to store or process your personal data. The global dashboard only securely tracks anonymous scores.</li>
+                    </ul>
+                </div>
             </div>
 
 
@@ -76,7 +83,7 @@
 
         <!-- Intro Screen -->
         <div class="screen hidden" id="intro-screen">
-            <h2 data-i18n="appTitle" class="glow-text">Relationship Matcher ✨</h2>
+            <h2 data-i18n="appTitle" class="glow-text">Relationship Quality ✨</h2>
             <div class="intro-card">
                 <p data-i18n="introDesc1">Hey there! 👋 This fun little quiz is actually based on a massive machine learning study of over 11,000 couples by <em>Joel et al. (2020)</em>.</p>
                 <p data-i18n="introDesc2">Ready to discover the real strength of your relationship using some hard science? Let's dive in!</p>
