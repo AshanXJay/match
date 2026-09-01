@@ -78,26 +78,7 @@ async function loadStatistics() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Privacy Modal Logic
-    const privBtn = document.getElementById('view-privacy-btn');
-    const privModal = document.getElementById('privacy-modal');
-    const privClose = document.getElementById('privacy-close-btn');
-    
-    if (privBtn) {
-        privBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            privModal.classList.remove('hidden');
-            void privModal.offsetWidth;
-            privModal.classList.add('active');
-        });
-    }
-    
-    if (privClose) {
-        privClose.addEventListener('click', () => {
-            privModal.classList.remove('active');
-            setTimeout(() => { privModal.classList.add('hidden'); }, 300);
-        });
-    }
+
 
     const statsBtn = document.getElementById('show-stats-btn');
     if (statsBtn) {
@@ -134,7 +115,14 @@ const translations = {
             nameDesc: "To give you the best experience, what are your names?",
             yourNameLabel: "Your Name",
             partnerNameLabel: "Partner's Name",
-            privacyGuarantee: "🔒 100% Private: End-to-End Encrypted. Links self-destruct after 1 hour and lock to your device.",
+            privacyGuaranteeHeader: "🔒 Ironclad Privacy",
+            privacyDetails: `<ul style="font-size: 0.85rem; padding-left: 20px; line-height: 1.5; text-align: left; opacity: 0.9;">
+                <li style="margin-bottom: 8px;"><strong>End-to-End Encrypted:</strong> Your names and answers are encrypted locally on your device (AES-GCM). The server cannot read them.</li>
+                <li style="margin-bottom: 8px;"><strong>Self-Destructing Links:</strong> Generated links automatically expire 1 hour after creation.</li>
+                <li style="margin-bottom: 8px;"><strong>Device Locking:</strong> Once a link is opened, it binds to that browser. If a 3rd party tries to open the same link, they will be blocked.</li>
+                <li><strong>No Database or Backend Servers:</strong> We have absolutely zero backend servers to store or process your personal data. The global dashboard only securely tracks anonymous scores.</li>
+            </ul>`,
+            
             breakdownTitle: "Top 10 Scientific Predictors",
             dyadicTitle: "Couples Growth Areas 🌱",
             predCommitment: "Commitment",
@@ -355,7 +343,14 @@ const translations = {
             nameDesc: "சிறந்த அனுபவத்தைப் பெற, உங்கள் பெயர்கள் என்ன?",
             yourNameLabel: "உங்கள் பெயர்",
             partnerNameLabel: "துணைவரின் பெயர்",
-            privacyGuarantee: "🔒 100% தனிப்பட்டவை: முழுமையாக குறியாக்கம் செய்யப்பட்டது. இணைப்புகள் 1 மணிநேரத்திற்குப் பிறகு காலாவதியாகும்.",
+            privacyGuaranteeHeader: "🔒 உறுதியான தனியுரிமை",
+            privacyDetails: `<ul style="font-size: 0.85rem; padding-left: 20px; line-height: 1.5; text-align: left; opacity: 0.9;">
+                <li style="margin-bottom: 8px;"><strong>முழுமையாக குறியாக்கம் செய்யப்பட்டது:</strong> உங்கள் பெயர்கள் மற்றும் பதில்கள் உங்கள் சாதனத்திலேயே குறியாக்கம் செய்யப்படுகின்றன (AES-GCM).</li>
+                <li style="margin-bottom: 8px;"><strong>தானாக அழியும் இணைப்புகள்:</strong> இணைப்புகள் 1 மணிநேரத்திற்குப் பிறகு காலாவதியாகும்.</li>
+                <li style="margin-bottom: 8px;"><strong>சாதனப் பூட்டு:</strong> இணைப்பைத் திறந்தவுடன் அது அந்த உலாவியுடன் பிணைக்கப்படும். வேறு யாரும் திறக்க முடியாது.</li>
+                <li><strong>தரவுத்தளம் அல்லது பின்தள (Backend) சேவையகங்கள் இல்லை:</strong> உங்கள் தனிப்பட்ட தரவை சேமிக்கவோ அல்லது கையாளவோ எங்களிடம் எந்த பின்தள சேவையகங்களும் (servers) இல்லை. உலகளாவிய டாஷ்போர்டு அநாமதேய மதிப்பெண்களை மட்டுமே பாதுகாப்பாகக் கண்காணிக்கிறது.</li>
+            </ul>`,
+            
             breakdownTitle: "முக்கிய 10 அறிவியல் காரணிகள்",
             dyadicTitle: "மேம்படுத்த வேண்டியவை 🌱",
             predCommitment: "அர்ப்பணிப்பு",
