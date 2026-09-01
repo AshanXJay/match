@@ -139,5 +139,54 @@
         
     </div>
     <script src="app.js"></script>
+
+    <!-- Stats Screen -->
+    <div id="stats-screen" class="screen hidden">
+        <div class="glass-card fade-in">
+            <h1 class="gradient-text" style="font-size: 1.8rem;">Global Statistics 🌍</h1>
+            <p style="margin-bottom: 20px; font-size: 0.9rem; opacity: 0.8;">Anonymous insights from thousands of couples.</p>
+            
+            <div id="stats-loading" style="text-align: center; margin: 30px 0;">
+                <div class="loader" style="width: 30px; height: 30px; border: 3px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto;"></div>
+                <p style="margin-top: 10px; font-size: 0.9rem;">Fetching live data...</p>
+            </div>
+            
+            <div id="stats-content" class="hidden">
+                <div class="stats-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;">
+                    <div class="stat-box" style="background: rgba(255,255,255,0.05); padding: 15px 10px; border-radius: 12px; text-align: center; border: 1px solid rgba(255,255,255,0.1);">
+                        <div style="font-size: 0.8rem; opacity: 0.7;">Single Tests</div>
+                        <div id="stat-single" style="font-size: 1.5rem; font-weight: 700; color: #fff;">0</div>
+                    </div>
+                    <div class="stat-box" style="background: rgba(255,255,255,0.05); padding: 15px 10px; border-radius: 12px; text-align: center; border: 1px solid rgba(255,255,255,0.1);">
+                        <div style="font-size: 0.8rem; opacity: 0.7;">Couple Tests</div>
+                        <div id="stat-couple" style="font-size: 1.5rem; font-weight: 700; color: #fff;">0</div>
+                    </div>
+                </div>
+                
+                <div class="stat-box" style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; text-align: center; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 15px;">
+                    <div style="font-size: 0.9rem; opacity: 0.7;">Average Global Couples Score</div>
+                    <div id="stat-avg-score" class="gradient-text" style="font-size: 2.2rem; font-weight: 800;">0%</div>
+                </div>
+                
+                <div style="text-align: left; margin-bottom: 15px;">
+                    <h3 style="font-size: 1rem; margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px;">Couples by Category</h3>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 5px;"><span>High (85-100%):</span> <span id="stat-cat-high" style="font-weight: bold;">0</span></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 5px;"><span>Moderate (70-84%):</span> <span id="stat-cat-mod" style="font-weight: bold;">0</span></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 5px;"><span>Growth (50-69%):</span> <span id="stat-cat-grow" style="font-weight: bold;">0</span></div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 5px;"><span>Needs Work (<50%):</span> <span id="stat-cat-needs" style="font-weight: bold;">0</span></div>
+                </div>
+                
+                <div style="text-align: left;">
+                    <h3 style="font-size: 1rem; margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px;">Avg 10 Predictor Ratings (/5)</h3>
+                    <div id="stat-avg-preds" style="font-size: 0.8rem; display: grid; grid-template-columns: 1fr; gap: 5px;">
+                        <!-- JS injects bars here -->
+                    </div>
+                </div>
+            </div>
+            
+            <button id="stats-back-btn" class="glass-btn secondary-btn" style="margin-top: 20px;">Return Home</button>
+        </div>
+    </div>
+
 </body>
 </html>

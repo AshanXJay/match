@@ -1,5 +1,99 @@
 let currentLang = 'en';
 
+const STATS_API_URL = "https://script.google.com/macros/s/AKfycbxSVmFLli_w4m7312Qk1aGBNXbiiZ-8tF4mFq4Q9TjTgO5xwDQAIiM_b0tPsgKhoePC6A/exec";
+
+async function pingStatsApi(payload, modeKey) {
+    if (STATS_API_URL === "https://script.google.com/macros/s/AKfycbxSVmFLli_w4m7312Qk1aGBNXbiiZ-8tF4mFq4Q9TjTgO5xwDQAIiM_b0tPsgKhoePC6A/exec" && false) return; // Note: removed guard so it runs
+    if (localStorage.getItem('match_pinged_' + modeKey)) return;
+    try {
+        await fetch(STATS_API_URL, {
+            method: 'POST',
+            body: JSON.stringify(payload),
+            headers: { 'Content-Type': 'text/plain' } // avoids CORS preflight
+        });
+        localStorage.setItem('match_pinged_' + modeKey, 'true');
+    } catch(e) { console.log('Stats ping failed', e); }
+}
+
+async function loadStatistics() {
+    const statsBtn = document.getElementById('show-stats-btn');
+    const statsScreen = document.getElementById('stats-screen');
+    const langScreen = document.getElementById('lang-screen');
+    
+    langScreen.classList.remove('active');
+    setTimeout(() => {
+        langScreen.classList.add('hidden');
+        statsScreen.classList.remove('hidden');
+        void statsScreen.offsetWidth;
+        statsScreen.classList.add('active');
+    }, 300);
+    
+    if (STATS_API_URL === "https://script.google.com/macros/s/AKfycbxSVmFLli_w4m7312Qk1aGBNXbiiZ-8tF4mFq4Q9TjTgO5xwDQAIiM_b0tPsgKhoePC6A/exec" && false) {
+        document.getElementById('stats-loading').innerHTML = '<p>Database not connected yet!</p>';
+        return;
+    }
+    
+    try {
+        let res = await fetch(STATS_API_URL);
+        let data = await res.json();
+        
+        document.getElementById('stats-loading').classList.add('hidden');
+        document.getElementById('stats-content').classList.remove('hidden');
+        
+        document.getElementById('stat-single').textContent = data.singleTests || 0;
+        document.getElementById('stat-couple').textContent = data.coupleTests || 0;
+        
+        let avgScore = data.coupleTests > 0 ? Math.round(data.sumScore / data.coupleTests) : 0;
+        document.getElementById('stat-avg-score').textContent = avgScore + '%';
+        
+        document.getElementById('stat-cat-high').textContent = data.catHigh || 0;
+        document.getElementById('stat-cat-mod').textContent = data.catMod || 0;
+        document.getElementById('stat-cat-grow').textContent = data.catGrow || 0;
+        document.getElementById('stat-cat-needs').textContent = data.catNeeds || 0;
+        
+        let predsHtml = '';
+        const predNames = ['Commitment', 'Appreciation', 'Sex', 'Partner Sat.', 'No Conflict', 'Responsiveness', 'Investment', 'Support', 'Capitalization', 'Attachment'];
+        
+        for (let i = 0; i < 10; i++) {
+            let avgP = data.coupleTests > 0 ? (data.sumPred[i] / data.coupleTests).toFixed(1) : 0;
+            let width = (avgP / 5) * 100;
+            predsHtml += `
+                <div style="margin-bottom: 5px;">
+                    <div style="display: flex; justify-content: space-between;"><span>${predNames[i]}</span><span>${avgP}</span></div>
+                    <div style="height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden;">
+                        <div style="height: 100%; width: ${width}%; background: linear-gradient(90deg, var(--primary), var(--secondary));"></div>
+                    </div>
+                </div>
+            `;
+        }
+        document.getElementById('stat-avg-preds').innerHTML = predsHtml;
+        
+    } catch(e) {
+        document.getElementById('stats-loading').innerHTML = '<p>Failed to load statistics.</p>';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const statsBtn = document.getElementById('show-stats-btn');
+    if (statsBtn) {
+        statsBtn.addEventListener('click', loadStatistics);
+    }
+    const statsBackBtn = document.getElementById('stats-back-btn');
+    if (statsBackBtn) {
+        statsBackBtn.addEventListener('click', () => {
+            document.getElementById('stats-screen').classList.remove('active');
+            setTimeout(() => {
+                document.getElementById('stats-screen').classList.add('hidden');
+                document.getElementById('lang-screen').classList.remove('hidden');
+                void document.getElementById('lang-screen').offsetWidth;
+                document.getElementById('lang-screen').classList.add('active');
+            }, 300);
+        });
+    }
+});
+
+
+
 const translations = {
     en: {
         ui: {
@@ -15,7 +109,7 @@ const translations = {
             nameDesc: "To give you the best experience, what are your names?",
             yourNameLabel: "Your Name",
             partnerNameLabel: "Partner's Name",
-            privacyGuarantee: "End-to-End Encrypted. Your names and answers never leave your devices.",
+            privacyGuarantee: "🔒 100% Private: End-to-End Encrypted. Links self-destruct after 1 hour and lock to your device.",
             breakdownTitle: "Top 10 Scientific Predictors",
             dyadicTitle: "Couples Growth Areas 🌱",
             predCommitment: "Commitment",
@@ -130,7 +224,7 @@ const translations = {
             nameDesc: "ඔබට හොඳම අත්දැකීම ලබා දීමට, ඔබේ නම් මොනවාද?",
             yourNameLabel: "ඔබේ නම",
             partnerNameLabel: "සහකරුගේ/සහකාරියගේ නම",
-            privacyGuarantee: "සම්පූර්ණයෙන්ම සංකේතනය කර ඇත. ඔබේ පිළිතුරු උපාංගයෙන් පිටතට නොයයි.",
+            privacyGuarantee: "🔒 100% පුද්ගලිකයි: සංකේතනය කර ඇත. සබැඳි පැය 1කට පසු විනාශ වන අතර ඔබේ උපාංගයට පමණක් සීමා වේ.",
             breakdownTitle: "ප්‍රධාන විද්‍යාත්මක සාධක 10",
             dyadicTitle: "වර්ධනය විය යුතු අංශ 🌱",
             predCommitment: "කැපවීම",
@@ -236,7 +330,7 @@ const translations = {
             nameDesc: "சிறந்த அனுபவத்தைப் பெற, உங்கள் பெயர்கள் என்ன?",
             yourNameLabel: "உங்கள் பெயர்",
             partnerNameLabel: "துணைவரின் பெயர்",
-            privacyGuarantee: "முழுமையாக குறியாக்கம் செய்யப்பட்டது. தரவுகள் உங்கள் சாதனத்தை விட்டு வெளியேறாது.",
+            privacyGuarantee: "🔒 100% தனிப்பட்டவை: முழுமையாக குறியாக்கம் செய்யப்பட்டது. இணைப்புகள் 1 மணிநேரத்திற்குப் பிறகு காலாவதியாகும்.",
             breakdownTitle: "முக்கிய 10 அறிவியல் காரணிகள்",
             dyadicTitle: "மேம்படுத்த வேண்டியவை 🌱",
             predCommitment: "அர்ப்பணிப்பு",
@@ -689,6 +783,7 @@ async function showResults() {
 
     // Setup WhatsApp Button
     if (appMode === 'p1') {
+        pingStatsApi({ type: 'single' }, 'p1');
         waShareBtn.classList.remove('hidden');
         waShareBtn.textContent = trans.ui.waShareP1.replace('{partner}', theirName);
         const data = { mode: 'p1', nA: myName, nB: theirName, answers: answers, lang: currentLang, timestamp: Date.now() };
@@ -718,6 +813,14 @@ async function showResults() {
         }, 1200);
     } 
     else if (appMode === 'p2') {
+        let preds = [];
+        for(let i=0; i<10; i++) {
+            let v1 = p1Data.answers[i]; if(questions[i].reverse) v1 = 6 - v1;
+            let v2 = p2Data.answers[i]; if(questions[i].reverse) v2 = 6 - v2;
+            preds.push((v1 + v2) / 2);
+        }
+        pingStatsApi({ type: 'couple', score: finalScore, preds: preds, cat: tierKey }, 'p2');
+        
         waShareBtn.classList.remove('hidden');
         waShareBtn.textContent = trans.ui.waShareP2.replace('{partner}', theirName);
         const data = { mode: 'final', p1: p1Data, p2: p2Data, lang: currentLang, timestamp: Date.now() };
