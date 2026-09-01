@@ -47,9 +47,9 @@ const translations = {
             modalCloseBtn: "எனது முடிவுகளை மட்டும் காட்டு",
             waShareP1: "Share to {partner} via WhatsApp 💬",
             waShareP2: "Send Final Results back to {partner} 💬",
-            waMsgP1: "Hey {nB}, {nA} just completed the Relationship Matcher! Tap here to securely take your turn: {link}",
-            waMsgP2: "Hey {nA}, {nB} has finished their turn! Tap here to view our Final Couples Results: {link}",
-            greetingP2: "Hi {nB}! {nA} has finished the quiz. Now it's your turn!",
+            waMsgP1: "Hey {nB}! 💕 {nA} just took a deep dive into your relationship and challenged you to do the same! Ready to see your combined Couples Score? Click here: {link}",
+            waMsgP2: "Hey {nA}! I just finished my part of the relationship test. Click here to see our final Couples Score and our areas for growth! {link}",
+            greetingP2: "Hey {nB}! 💕 {nA} just took a deep dive into your relationship and challenged you to do the same! Ready to see your combined Couples Score?",
             dyadicAdviceStrings: [
                 "{name}, {partner} is feeling a bit unsure about the long-term commitment. Having an open, reassuring conversation about the future could help immensely.", // 0
                 "{name}, {partner} is feeling a bit under-appreciated right now. Try to vocalize your gratitude for the little things they do.", // 1
@@ -153,9 +153,9 @@ const translations = {
             modalCloseBtn: "Just show my results",
             waShareP1: "{partner} වෙත WhatsApp හරහා යවන්න 💬",
             waShareP2: "අවසාන ප්‍රතිඵල {partner} වෙත යවන්න 💬",
-            waMsgP1: "හායි {nB}, {nA} මේ දැන් ඇගයීම අවසන් කළා! ඔබේ වාරය සඳහා මෙතන ඔබන්න: {link}",
-            waMsgP2: "හායි {nA}, {nB} ඇගයීම අවසන් කළා! අවසාන ප්‍රතිඵල බැලීමට මෙතන ඔබන්න: {link}",
-            greetingP2: "හායි {nB}! {nA} ඇගයීම අවසන් කළා. දැන් ඔබේ වාරයයි!",
+            waMsgP1: "හලෝ {nB}! මම අපේ සම්බන්ධතාවය ගැන පරීක්ෂණයක් කළා. ඔයාගේ කොටසත් මෙතනින් කරන්න, එතකොට අපිට අපේ Couples Score එකයි, අපි හදාගන්න ඕන දේවලුයි බලාගන්න පුළුවන්! {link}",
+            waMsgP2: "හලෝ {nA}! මම මගේ කොටස කළා. අපේ අවසාන Couples Score එකයි, අපි හදාගන්න ඕන දේවලුයි බලන්න මෙතන ක්ලික් කරන්න! {link}",
+            greetingP2: "හලෝ {nB}! 💕 {nA} ඔයාලගේ සම්බන්ධතාවය ගැන පරීක්ෂණයක් කරලා ඔයාටත් ඒක කරන්න කියලා එව්වා! ඔයාලගේ Couples Score එක බලන්න ලෑස්තිද?",
             dyadicAdviceStrings: [
                 "{name}, අනාගතය ගැන {partner} ට පොඩි සැකයක් තියෙනවා වගේ. ඒ ගැන විවෘතව කතා කරන්න.", // 0
                 "{name}, {partner} ට තමන්ව අගය කරන්නේ නෑ වගේ හැඟීමක් තියෙනවා. ඔවුන් කරන දේවල් වලට ස්තූති කරන්න පුරුදු වෙන්න.", // 1
@@ -690,6 +690,7 @@ async function showResults() {
         const modalWaBtn = document.getElementById('modal-wa-btn');
         modalWaBtn.textContent = trans.ui.modalShareBtn.replace('{partner}', theirName);
         modalWaBtn.href = waShareBtn.href;
+        document.getElementById('modal-close-btn').style.display = 'inline-block';
         
         let descStr = currentLang === 'en' ? `Send this to <strong>${theirName}</strong> to discover your combined score and see what areas you both can grow in!` : 
                       currentLang === 'si' ? `ඔබ දෙදෙනාගේම ප්‍රතිඵල දැනගැනීමට මෙය <strong>${theirName}</strong> වෙත යවන්න!` : 
@@ -713,6 +714,31 @@ async function showResults() {
         const link = `${window.location.origin}${window.location.pathname}?q=${encrypted}#key=${keyStr}`;
         const msg = trans.ui.waMsgP2.replace('{nA}', theirName).replace('{nB}', myName).replace('{link}', link);
         waShareBtn.href = `https://wa.me/?text=${encodeURIComponent(msg)}`;
+        
+        // Unclosable popup for P2
+        const modalWaBtn = document.getElementById('modal-wa-btn');
+        modalWaBtn.textContent = trans.ui.waShareP2.replace('{partner}', theirName);
+        modalWaBtn.href = waShareBtn.href;
+        
+        // Hide close button
+        document.getElementById('modal-close-btn').style.display = 'none';
+        
+        let titleStr = currentLang === 'en' ? `Send to ${theirName} to Unlock!` : 
+                       currentLang === 'si' ? `ප්‍රතිඵල බැලීමට ${theirName} වෙත යවන්න!` : 
+                       `${theirName} -க்கு அனுப்பி முடிவுகளைப் பார்க்கவும்!`;
+        document.querySelector('#couples-modal h2').innerHTML = titleStr;
+                       
+        let descStr = currentLang === 'en' ? `You've finished! To reveal your relationship breakdown and advice, you MUST send the Final Results back to <strong>${theirName}</strong>.` : 
+                      currentLang === 'si' ? `ඔබේ ඇගයීම අවසන්! ඔබේ ප්‍රතිඵල සහ උපදෙස් බැලීමට, අවසාන ප්‍රතිඵල <strong>${theirName}</strong> වෙත යැවිය යුතුමයි.` : 
+                      `நீங்கள் முடித்துவிட்டீர்கள்! உங்கள் முடிவுகள் மற்றும் ஆலோசனைகளைப் பார்க்க, இறுதி முடிவுகளை <strong>${theirName}</strong> -க்கு அனுப்ப வேண்டும்.`;
+        document.getElementById('modal-desc').innerHTML = descStr;
+        
+        setTimeout(() => {
+            const modal = document.getElementById('couples-modal');
+            modal.classList.remove('hidden');
+            void modal.offsetWidth;
+            modal.classList.add('active');
+        }, 1200);
         
         generateDyadicAdvice(p1Data.answers, p2Data.answers, p1Data.nA, p1Data.nB);
     }
