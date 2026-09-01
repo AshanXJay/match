@@ -434,6 +434,19 @@ window.onload = async () => {
             const key = await importKey(keyString);
             const decrypted = await decryptData(urlParams.get('q'), key);
             
+            // Validate Expiration (1 hour)
+            if (decrypted.timestamp) {
+                const ONE_HOUR = 60 * 60 * 1000;
+                if (Date.now() - decrypted.timestamp > ONE_HOUR) {
+                    let expMsg = currentLang === 'si' ? "මෙම සබැඳිය කල් ඉකුත් වී ඇත (පැය 1කට පමණක් වලංගු වේ)." :
+                                 currentLang === 'ta' ? "இந்த இணைப்பு காலாவதியாகிவிட்டது (1 மணிநேரம் மட்டுமே செல்லுபடியாகும்)." :
+                                 "This link has expired for privacy reasons (valid for 1 hour).";
+                    alert(expMsg);
+                    window.location.href = window.location.origin + window.location.pathname;
+                    return;
+                }
+            }
+            
             // Validate Device Isolation
             if (decrypted.mode === 'p1') {
                 if (matchRole === 'A') {
@@ -678,7 +691,7 @@ async function showResults() {
     if (appMode === 'p1') {
         waShareBtn.classList.remove('hidden');
         waShareBtn.textContent = trans.ui.waShareP1.replace('{partner}', theirName);
-        const data = { mode: 'p1', nA: myName, nB: theirName, answers: answers, lang: currentLang };
+        const data = { mode: 'p1', nA: myName, nB: theirName, answers: answers, lang: currentLang, timestamp: Date.now() };
         const key = await generateKey();
         const encrypted = await encryptData(data, key);
         const keyStr = await exportKey(key);
@@ -707,7 +720,7 @@ async function showResults() {
     else if (appMode === 'p2') {
         waShareBtn.classList.remove('hidden');
         waShareBtn.textContent = trans.ui.waShareP2.replace('{partner}', theirName);
-        const data = { mode: 'final', p1: p1Data, p2: p2Data, lang: currentLang };
+        const data = { mode: 'final', p1: p1Data, p2: p2Data, lang: currentLang, timestamp: Date.now() };
         const key = await generateKey();
         const encrypted = await encryptData(data, key);
         const keyStr = await exportKey(key);
