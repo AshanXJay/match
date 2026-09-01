@@ -616,7 +616,11 @@ window.onload = async () => {
             langScreen.classList.add('hidden');
             
             let greeting = translations[currentLang].ui.greetingP2.replace('{nA}', theirName).replace('{nB}', myName);
-            document.querySelector('#intro-screen .intro-card').innerHTML = `<p>${greeting}</p><p>${translations[currentLang].ui.introDesc2}</p>`;
+                        let privacyAssurance = currentLang === 'en' ? `🔒 Rest assured, ${theirName} cannot see your individual answers, and you won't see theirs either!` :
+                                   currentLang === 'si' ? `🔒 බිය නොවන්න, ${theirName} හට ඔබගේ තනි පිළිතුරු දැකිය නොහැකි අතර, ඔබටද ඔවුන්ගේ පිළිතුරු දැකිය නොහැක!` :
+                                   `🔒 கவலைப்பட வேண்டாம், ${theirName} உங்கள் தனிப்பட்ட பதில்களைக் காண முடியாது, நீங்களும் அவர்களின் பதில்களைக் காண முடியாது!`;
+            
+            document.querySelector('#intro-screen .intro-card').innerHTML = `<p>${greeting}</p><p>${translations[currentLang].ui.introDesc2}</p><p style="font-size: 0.85rem; color: var(--primary); margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;">${privacyAssurance}</p>`;
             
             introScreen.classList.remove('hidden');
             introScreen.classList.add('active');
@@ -830,9 +834,9 @@ async function showResults() {
         modalWaBtn.href = waShareBtn.href;
         document.getElementById('modal-close-btn').style.display = 'inline-block';
         
-        let descStr = currentLang === 'en' ? `Send this to <strong>${theirName}</strong> to discover your combined score and see what areas you both can grow in!` : 
-                      currentLang === 'si' ? `ඔබ දෙදෙනාගේම ප්‍රතිඵල දැනගැනීමට මෙය <strong>${theirName}</strong> වෙත යවන්න!` : 
-                      `உங்கள் இருவரின் முடிவுகளையும் காண இதை <strong>${theirName}</strong> -க்கு அனுப்பவும்!`;
+        let descStr = currentLang === 'en' ? `Send this to <strong>${theirName}</strong> to discover your combined score and see what areas you both can grow in!<br><br><span style="font-size:0.85rem; color:var(--primary);">🔒 Don't worry, ${theirName} will NOT see your individual answers or stats!</span>` : 
+                      currentLang === 'si' ? `ඔබ දෙදෙනාගේම ප්‍රතිඵල දැනගැනීමට මෙය <strong>${theirName}</strong> වෙත යවන්න!<br><br><span style="font-size:0.85rem; color:var(--primary);">🔒 බිය නොවන්න, ${theirName} හට ඔබගේ තනි පිළිතුරු හෝ ප්‍රතිඵල දැකිය නොහැක!</span>` : 
+                      `உங்கள் இருவரின் முடிவுகளையும் காண இதை <strong>${theirName}</strong> -க்கு அனுப்பவும்!<br><br><span style="font-size:0.85rem; color:var(--primary);">🔒 கவலைப்பட வேண்டாம், ${theirName} உங்கள் தனிப்பட்ட பதில்களைக் காண முடியாது!</span>`;
         document.getElementById('modal-desc').innerHTML = descStr;
         
         setTimeout(() => {
