@@ -36,6 +36,15 @@ const translations = {
             retakeBtn: "Take it again! 🔄",
             viewMyBreakdown: "View my detailed breakdown 📊",
             viewMyBreakdown: "මගේ විස්තරාත්මක ප්‍රතිඵල බලන්න 📊",
+            modalTitle: "Unlock Couples Mode! 💖",
+            modalShareBtn: "Share to {partner} via WhatsApp 💬",
+            modalCloseBtn: "Just show my results",
+            modalTitle: "Couples Mode විවෘත කරන්න! 💖",
+            modalShareBtn: "{partner} වෙත WhatsApp හරහා යවන්න 💬",
+            modalCloseBtn: "මගේ ප්‍රතිඵල පමණක් පෙන්වන්න",
+            modalTitle: "Couples Mode-ஐ திறக்கவும்! 💖",
+            modalShareBtn: "{partner} -க்கு WhatsApp மூலம் பகிரவும் 💬",
+            modalCloseBtn: "எனது முடிவுகளை மட்டும் காட்டு",
             waShareP1: "Share to {partner} via WhatsApp 💬",
             waShareP2: "Send Final Results back to {partner} 💬",
             waMsgP1: "Hey {nB}, {nA} just completed the Relationship Matcher! Tap here to securely take your turn: {link}",
@@ -139,6 +148,9 @@ const translations = {
             insightDesc: "අධ්‍යයනයට අනුව: 1) ඔබේ පෞද්ගලික ලක්ෂණ වලට වඩා ඔබේ සම්බන්ධතාවය ගැන ඔබට හැඟෙන ආකාරය මෙහිදී ගොඩක් වැදගත් වෙනවා. 2) අනාගතය කොහොම වෙයිද කියලා කිසිම ඇගයීමකට කියන්න බෑ, ඒ නිසා මේ ප්‍රතිඵල වලින් පෙන්වන්නේ ඔබේ වත්මන් තත්වය විතරයි!",
             retakeBtn: "නැවත කරමු! 🔄",
             viewMyBreakdown: "View my detailed breakdown 📊",
+            modalTitle: "Unlock Couples Mode! 💖",
+            modalShareBtn: "Share to {partner} via WhatsApp 💬",
+            modalCloseBtn: "Just show my results",
             waShareP1: "{partner} වෙත WhatsApp හරහා යවන්න 💬",
             waShareP2: "අවසාන ප්‍රතිඵල {partner} වෙත යවන්න 💬",
             waMsgP1: "හායි {nB}, {nA} මේ දැන් ඇගයීම අවසන් කළා! ඔබේ වාරය සඳහා මෙතන ඔබන්න: {link}",
@@ -242,6 +254,9 @@ const translations = {
             insightDesc: "ஆய்வின்படி: 1) உங்கள் தனிப்பட்ட குணாதிசயங்களை விட உங்கள் உறவைப் பற்றி நீங்கள் எப்படி உணர்கிறீர்கள் என்பதே இங்கு மிகவும் முக்கியமானது. 2) எதிர்காலம் எப்படி இருக்கும் என்று எந்தவொரு மதிப்பீட்டாலும் சொல்ல முடியாது!",
             retakeBtn: "மீண்டும் செய்யலாம்! 🔄",
             viewMyBreakdown: "View my detailed breakdown 📊",
+            modalTitle: "Unlock Couples Mode! 💖",
+            modalShareBtn: "Share to {partner} via WhatsApp 💬",
+            modalCloseBtn: "Just show my results",
             waShareP1: "{partner} -க்கு WhatsApp மூலம் பகிரவும் 💬",
             waShareP2: "இறுதி முடிவுகளை {partner} -க்கு அனுப்பவும் 💬",
             waMsgP1: "ஹாய் {nB}, {nA} மதிப்பீட்டை முடித்துவிட்டார்! உங்கள் முறையைத் தொடங்க இங்கே கிளிக் செய்யவும்: {link}",
@@ -355,7 +370,21 @@ document.getElementById('view-my-breakdown-btn').addEventListener('click', funct
     document.getElementById('breakdown-container').classList.remove('hidden');
 });
 
-// --- E2E Encryption (Web Crypto API) ---
+
+document.getElementById('modal-close-btn').addEventListener('click', () => {
+    const modal = document.getElementById('couples-modal');
+    modal.classList.remove('active');
+    setTimeout(() => modal.classList.add('hidden'), 400);
+});
+
+document.getElementById('modal-wa-btn').addEventListener('click', () => {
+    const modal = document.getElementById('couples-modal');
+    modal.classList.remove('active');
+    setTimeout(() => modal.classList.add('hidden'), 400);
+});
+
+// --- E2E Encryption
+ (Web Crypto API) ---
 async function generateKey() {
     return await window.crypto.subtle.generateKey({ name: "AES-GCM", length: 256 }, true, ["encrypt", "decrypt"]);
 }
@@ -610,6 +639,7 @@ async function showResults() {
     titleEl.textContent = trans.resultTiers[tierKey + 'Title'];
     descEl.innerHTML = trans.dynamicText.overallText.replace('{score}', finalScore) + trans.resultTiers[tierKey + 'Desc'] + trans.dynamicText['advice_' + tierKey];
     
+
     // Setup WhatsApp Button
     if (appMode === 'p1') {
         waShareBtn.classList.remove('hidden');
@@ -621,6 +651,23 @@ async function showResults() {
         const link = `${window.location.origin}${window.location.pathname}?q=${encrypted}#key=${keyStr}`;
         const msg = trans.ui.waMsgP1.replace('{nA}', myName).replace('{nB}', theirName).replace('{link}', link);
         waShareBtn.href = `https://wa.me/?text=${encodeURIComponent(msg)}`;
+        
+        // Setup Modal popup for Couples Mode
+        const modalWaBtn = document.getElementById('modal-wa-btn');
+        modalWaBtn.textContent = trans.ui.modalShareBtn.replace('{partner}', theirName);
+        modalWaBtn.href = waShareBtn.href;
+        
+        let descStr = currentLang === 'en' ? `Send this to <strong>${theirName}</strong> to discover your combined score and see what areas you both can grow in!` : 
+                      currentLang === 'si' ? `ඔබ දෙදෙනාගේම ප්‍රතිඵල දැනගැනීමට මෙය <strong>${theirName}</strong> වෙත යවන්න!` : 
+                      `உங்கள் இருவரின் முடிவுகளையும் காண இதை <strong>${theirName}</strong> -க்கு அனுப்பவும்!`;
+        document.getElementById('modal-desc').innerHTML = descStr;
+        
+        setTimeout(() => {
+            const modal = document.getElementById('couples-modal');
+            modal.classList.remove('hidden');
+            void modal.offsetWidth;
+            modal.classList.add('active');
+        }, 1200);
     } 
     else if (appMode === 'p2') {
         waShareBtn.classList.remove('hidden');
