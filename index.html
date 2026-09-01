@@ -27,6 +27,20 @@
         </div>
     </div>
     
+
+    <!-- Privacy Modal -->
+    <div id="privacy-modal" class="modal hidden">
+        <div class="modal-content intro-card" style="text-align: left;">
+            <h2 style="text-align: center; margin-bottom: 15px;">Ironclad Privacy 🔒</h2>
+            <ul style="font-size: 0.9rem; padding-left: 20px; line-height: 1.5; margin-bottom: 20px;">
+                <li style="margin-bottom: 10px;"><strong>End-to-End Encrypted:</strong> Your names and answers are encrypted locally on your device (AES-GCM). The server cannot read them.</li>
+                <li style="margin-bottom: 10px;"><strong>Self-Destructing Links:</strong> Generated links automatically expire 1 hour after creation.</li>
+                <li style="margin-bottom: 10px;"><strong>Device Locking:</strong> Once a link is opened, it binds to that browser. If a 3rd party tries to open the same link, they will be blocked.</li>
+                <li><strong>No Database:</strong> We do not store any personal data. Our global dashboard only tracks anonymous scores.</li>
+            </ul>
+            <button id="privacy-close-btn" class="btn btn-outline" style="width: 100%;">I understand</button>
+        </div>
+    </div>
     <div class="app-container">
         
         <!-- Language Selection Screen -->
@@ -68,6 +82,8 @@
                 <span class="icon">🔒</span>
                 <span data-i18n="privacyGuarantee">End-to-End Encrypted. Your names and answers never leave your devices.</span>
             </div>
+            <a href="#" id="view-privacy-btn" style="display: block; text-align: center; font-size: 0.8rem; text-decoration: underline; color: var(--primary); margin-bottom: 20px;">Read Detailed Privacy Policy 🛡️</a>
+
 
             <button class="btn" id="names-next-btn" data-i18n="nextBtn">Next</button>
         </div>

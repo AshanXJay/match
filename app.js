@@ -56,16 +56,16 @@ async function loadStatistics() {
         
         for (let i = 0; i < 10; i++) {
             let totalTests = data.coupleTests + (data.singleTests || 0);
-            let avgP = totalTests > 0 ? (data.sumPred[i] / totalTests).toFixed(1) : 0;
-            let width = (avgP / 5) * 100;
+            let avgP = totalTests > 0 ? (data.sumPred[i] / totalTests) : 0;
+            let pct = totalTests > 0 ? Math.max(0, Math.round(((avgP - 1) / 4) * 100)) : 0;
             predsHtml += `
                 <div class="breakdown-item">
                     <div class="breakdown-header"><span class="bd-title">${predNames[i]}</span></div>
                     <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:2px; color:#94a3b8;">
-                        <span>Global Avg</span><span style="color:var(--primary); font-weight:bold;">${avgP}/5</span>
+                        <span>Global Avg</span><span style="color:var(--primary); font-weight:bold;">${pct}%</span>
                     </div>
                     <div class="bd-bar-bg">
-                        <div class="bd-bar" style="width: ${width}%; background: linear-gradient(90deg, var(--primary), var(--secondary));"></div>
+                        <div class="bd-bar" style="width: ${pct}%; background: linear-gradient(90deg, var(--primary), var(--secondary));"></div>
                     </div>
                 </div>
             `;
@@ -78,6 +78,27 @@ async function loadStatistics() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Privacy Modal Logic
+    const privBtn = document.getElementById('view-privacy-btn');
+    const privModal = document.getElementById('privacy-modal');
+    const privClose = document.getElementById('privacy-close-btn');
+    
+    if (privBtn) {
+        privBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            privModal.classList.remove('hidden');
+            void privModal.offsetWidth;
+            privModal.classList.add('active');
+        });
+    }
+    
+    if (privClose) {
+        privClose.addEventListener('click', () => {
+            privModal.classList.remove('active');
+            setTimeout(() => { privModal.classList.add('hidden'); }, 300);
+        });
+    }
+
     const statsBtn = document.getElementById('show-stats-btn');
     if (statsBtn) {
         statsBtn.addEventListener('click', loadStatistics);
