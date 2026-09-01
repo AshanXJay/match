@@ -11,37 +11,65 @@ const translations = {
             nextBtn: "Next",
             resultsBtn: "Show my results! 🎉",
             profileTitle: "Here's how things look! 💖",
+            nameTitle: "Let's personalize this!",
+            nameDesc: "To give you the best experience, what are your names?",
+            yourNameLabel: "Your Name",
+            partnerNameLabel: "Partner's Name",
+            privacyGuarantee: "End-to-End Encrypted. Your names and answers never leave your devices.",
             breakdownTitle: "Top 10 Scientific Predictors",
-            predCommitment: "Perceived Partner Commitment",
+            dyadicTitle: "Couples Growth Areas 🌱",
+            predCommitment: "Commitment",
             predAppreciation: "Appreciation",
             predSex: "Sexual Satisfaction",
-            predPartnerSat: "Perceived Partner Satisfaction",
+            predPartnerSat: "Partner Satisfaction",
             predConflict: "Absence of Conflict",
-            predResponsiveness: "Perceived Partner Responsiveness",
-            predInvestment: "Investment in Relationship",
+            predResponsiveness: "Responsiveness",
+            predInvestment: "Investment",
             predSupport: "General Support",
             predCapitalization: "Celebrating Successes",
             predAttachment: "Comfort & Security",
             insightTitle: "A quick science note 🧬",
+            viewMyBreakdown: "View my detailed breakdown 📊",
             insightDesc: "According to the study: 1) Your individual traits (like anxiety) actually don't add much to this score beyond how you feel about your relationship. 2) No quiz can predict the future, so these results just show where you are right now!",
-            retakeBtn: "Take it again! 🔄"
+            viewMyBreakdown: "මගේ විස්තරාත්මක ප්‍රතිඵල බලන්න 📊",
+            viewMyBreakdown: "View my detailed breakdown 📊",
+            retakeBtn: "Take it again! 🔄",
+            viewMyBreakdown: "View my detailed breakdown 📊",
+            viewMyBreakdown: "මගේ විස්තරාත්මක ප්‍රතිඵල බලන්න 📊",
+            waShareP1: "Share to {partner} via WhatsApp 💬",
+            waShareP2: "Send Final Results back to {partner} 💬",
+            waMsgP1: "Hey {nB}, {nA} just completed the Relationship Matcher! Tap here to securely take your turn: {link}",
+            waMsgP2: "Hey {nA}, {nB} has finished their turn! Tap here to view our Final Couples Results: {link}",
+            greetingP2: "Hi {nB}! {nA} has finished the quiz. Now it's your turn!",
+            dyadicAdviceStrings: [
+                "{name}, {partner} is feeling a bit unsure about the long-term commitment. Having an open, reassuring conversation about the future could help immensely.", // 0
+                "{name}, {partner} is feeling a bit under-appreciated right now. Try to vocalize your gratitude for the little things they do.", // 1
+                "{name}, {partner} seems to be wanting a deeper physical connection. This is a great opportunity to openly discuss your physical intimacy needs.", // 2
+                "{name}, {partner} is worried you aren't fully happy in the relationship. Remind them of the things they do that make you smile.", // 3
+                "{name}, conflict is feeling high for {partner}. Practice pausing when things get heated, and focus on attacking the problem together rather than attacking each other.", // 4
+                "{name}, {partner} doesn't feel fully understood right now. Try active listening—just listen to understand, not to reply.", // 5
+                "{name}, {partner} feels like they are putting in a lot of energy. Make sure you are actively matching their effort in the relationship.", // 6
+                "{name}, {partner} isn't feeling fully supported when things get tough. Be sure to check in on them during stressful times.", // 7
+                "{name}, {partner} wants you to celebrate their wins more! When something good happens to them, be their biggest cheerleader.", // 8
+                "{name}, {partner} isn't feeling fully secure depending on you right now. Consistency and reliability will build that comfort back up." // 9
+            ]
         },
         resultTiers: {
             highTitle: "Wow, you two are doing amazing! 🌟",
-            highDesc: "Your answers point to a super positive, strong relationship right now. Keep nurturing this beautiful bond!",
+            highDesc: "The answers point to a super positive, strong relationship right now. Keep nurturing this beautiful bond!",
             modTitle: "You've got a solid foundation! 😊",
             modDesc: "You have a fairly typical and healthy relationship. To take it to the next level, check out the advice below.",
             growTitle: "You're building something good! 🌱",
             growDesc: "There’s definitely some satisfaction here, but also plenty of room to grow together. The key is consistent effort.",
             needsTitle: "Things might be a little rocky right now. ❤️‍🩹",
-            needsDesc: "Your answers suggest some friction at the moment. Don't worry, every relationship has tough seasons."
+            needsDesc: "The answers suggest some friction at the moment. Don't worry, every relationship has tough seasons."
         },
         dynamicText: {
-            overallText: "You scored <strong>{score}%</strong> overall! ",
-            advice_high: "<br><br>💡 <strong>Best Advice for You:</strong> The best thing you can do now is just keep prioritizing quality time together to maintain this strong connection.",
-            advice_mod: "<br><br>💡 <strong>Best Advice for You:</strong> You have a solid base! Try setting aside time this week to openly discuss your future goals and how you can support each other even more.",
-            advice_grow: "<br><br>💡 <strong>Best Advice for You:</strong> Focus on rebuilding intimacy through small, daily acts of affection. A simple 'thank you' or an unexpected hug can do wonders.",
-            advice_needs: "<br><br>💡 <strong>Best Advice for You:</strong> Conflict is normal, but how you handle it matters. Practice pausing when things get heated, and focus on attacking the problem together rather than attacking each other."
+            overallText: "The overall relationship score is <strong>{score}%</strong>! ",
+            advice_high: "<br><br>💡 <strong>Best Advice:</strong> The best thing you can do now is just keep prioritizing quality time together to maintain this strong connection.",
+            advice_mod: "<br><br>💡 <strong>Best Advice:</strong> You have a solid base! Try setting aside time this week to openly discuss your future goals and how you can support each other even more.",
+            advice_grow: "<br><br>💡 <strong>Best Advice:</strong> Focus on rebuilding intimacy through small, daily acts of affection. A simple 'thank you' or an unexpected hug can do wonders.",
+            advice_needs: "<br><br>💡 <strong>Best Advice:</strong> Conflict is normal, but how you handle it matters. Practice pausing when things get heated."
         },
         optionSets: {
             agreement: [
@@ -67,16 +95,16 @@ const translations = {
             ]
         },
         questions: [
-            { id: 'q1', text: 'Do you feel like your partner is in this for the long haul?', weight: 85, optionSet: 'agreement', reverse: false },
-            { id: 'q2', text: 'How lucky do you feel to have your partner by your side?', weight: 72, optionSet: 'agreement', reverse: false },
+            { id: 'q1', text: 'Do you feel like {partner} is in this for the long haul?', weight: 85, optionSet: 'agreement', reverse: false },
+            { id: 'q2', text: 'How lucky do you feel to have {partner} by your side?', weight: 72, optionSet: 'agreement', reverse: false },
             { id: 'q3', text: 'How are you feeling about the intimacy and spark in your sex life?', weight: 71, optionSet: 'satisfaction', reverse: false },
-            { id: 'q4', text: 'Do you think your relationship brings a lot of happiness to your partner?', weight: 70, optionSet: 'agreement', reverse: false },
-            { id: 'q5', text: 'Let\'s be real, how often do you two end up arguing or fighting?', weight: 69, optionSet: 'frequency', reverse: true },
-            { id: 'q6', text: 'Does your partner really \"get\" you and understand what you need?', weight: 69, optionSet: 'agreement', reverse: false },
+            { id: 'q4', text: 'Do you think your relationship brings a lot of happiness to {partner}?', weight: 70, optionSet: 'agreement', reverse: false },
+            { id: 'q5', text: 'Let\'s be real, how often do you and {partner} end up arguing or fighting?', weight: 69, optionSet: 'frequency', reverse: true },
+            { id: 'q6', text: 'Does {partner} really \"get\" you and understand what you need?', weight: 69, optionSet: 'agreement', reverse: false },
             { id: 'q7', text: 'Have you put a lot of your heart, time, and energy into making this work?', weight: 67, optionSet: 'agreement', reverse: false },
-            { id: 'q8', text: 'Can you always count on your partner for support when things get tough?', weight: 64, optionSet: 'agreement', reverse: false },
-            { id: 'q9', text: 'Does your partner genuinely celebrate your personal successes with you?', weight: 58, optionSet: 'agreement', reverse: false },
-            { id: 'q10', text: 'Do you feel completely comfortable depending on your partner?', weight: 58, optionSet: 'agreement', reverse: false }
+            { id: 'q8', text: 'Can you always count on {partner} for support when things get tough?', weight: 64, optionSet: 'agreement', reverse: false },
+            { id: 'q9', text: 'Does {partner} genuinely celebrate your personal successes with you?', weight: 58, optionSet: 'agreement', reverse: false },
+            { id: 'q10', text: 'Do you feel completely comfortable depending on {partner}?', weight: 58, optionSet: 'agreement', reverse: false }
         ]
     },
     si: {
@@ -87,22 +115,47 @@ const translations = {
             startBtn: "පටන්ගමු! 🚀",
             prevBtn: "ආපසු",
             nextBtn: "ඊළඟ",
-            resultsBtn: "මගේ ප්‍රතිඵල පෙන්වන්න! 🎉",
+            resultsBtn: "ප්‍රතිඵල පෙන්වන්න! 🎉",
             profileTitle: "ඔබේ ප්‍රතිඵල මෙන්න! 💖",
+            nameTitle: "ඔබව හඳුනාගනිමු!",
+            nameDesc: "ඔබට හොඳම අත්දැකීම ලබා දීමට, ඔබේ නම් මොනවාද?",
+            yourNameLabel: "ඔබේ නම",
+            partnerNameLabel: "සහකරුගේ/සහකාරියගේ නම",
+            privacyGuarantee: "සම්පූර්ණයෙන්ම සංකේතනය කර ඇත. ඔබේ පිළිතුරු උපාංගයෙන් පිටතට නොයයි.",
             breakdownTitle: "ප්‍රධාන විද්‍යාත්මක සාධක 10",
-            predCommitment: "සහකරුගේ කැපවීම පිළිබඳ හැඟීම",
+            dyadicTitle: "වර්ධනය විය යුතු අංශ 🌱",
+            predCommitment: "කැපවීම",
             predAppreciation: "අගය කිරීම",
             predSex: "ලිංගික තෘප්තිය",
-            predPartnerSat: "සහකරුගේ තෘප්තිය පිළිබඳ හැඟීම",
+            predPartnerSat: "සහකරුගේ තෘප්තිය",
             predConflict: "ගැටුම් නොමැති වීම",
-            predResponsiveness: "සහකරුගේ ප්‍රතිචාරාත්මක බව",
-            predInvestment: "සම්බන්ධතාවය සඳහා කැපවීම",
+            predResponsiveness: "ප්‍රතිචාරාත්මක බව",
+            predInvestment: "කැපවීම",
             predSupport: "සාමාන්‍ය සහයෝගය",
             predCapitalization: "ජයග්‍රහණ සැමරීම",
             predAttachment: "සුවපහසුව සහ ආරක්ෂාව",
             insightTitle: "කුඩා විද්‍යාත්මක සටහනක් 🧬",
+            viewMyBreakdown: "මගේ විස්තරාත්මක ප්‍රතිඵල බලන්න 📊",
             insightDesc: "අධ්‍යයනයට අනුව: 1) ඔබේ පෞද්ගලික ලක්ෂණ වලට වඩා ඔබේ සම්බන්ධතාවය ගැන ඔබට හැඟෙන ආකාරය මෙහිදී ගොඩක් වැදගත් වෙනවා. 2) අනාගතය කොහොම වෙයිද කියලා කිසිම ඇගයීමකට කියන්න බෑ, ඒ නිසා මේ ප්‍රතිඵල වලින් පෙන්වන්නේ ඔබේ වත්මන් තත්වය විතරයි!",
-            retakeBtn: "නැවත කරමු! 🔄"
+            retakeBtn: "නැවත කරමු! 🔄",
+            viewMyBreakdown: "View my detailed breakdown 📊",
+            waShareP1: "{partner} වෙත WhatsApp හරහා යවන්න 💬",
+            waShareP2: "අවසාන ප්‍රතිඵල {partner} වෙත යවන්න 💬",
+            waMsgP1: "හායි {nB}, {nA} මේ දැන් ඇගයීම අවසන් කළා! ඔබේ වාරය සඳහා මෙතන ඔබන්න: {link}",
+            waMsgP2: "හායි {nA}, {nB} ඇගයීම අවසන් කළා! අවසාන ප්‍රතිඵල බැලීමට මෙතන ඔබන්න: {link}",
+            greetingP2: "හායි {nB}! {nA} ඇගයීම අවසන් කළා. දැන් ඔබේ වාරයයි!",
+            dyadicAdviceStrings: [
+                "{name}, අනාගතය ගැන {partner} ට පොඩි සැකයක් තියෙනවා වගේ. ඒ ගැන විවෘතව කතා කරන්න.", // 0
+                "{name}, {partner} ට තමන්ව අගය කරන්නේ නෑ වගේ හැඟීමක් තියෙනවා. ඔවුන් කරන දේවල් වලට ස්තූති කරන්න පුරුදු වෙන්න.", // 1
+                "{name}, {partner} ශාරීරික සමීප බව ගැන තව බලාපොරොත්තු වෙනවා. මේ ගැන විවෘතව කතා කරන්න.", // 2
+                "{name}, ඔබ සම්පූර්ණයෙන්ම සතුටින් නෑ කියලා {partner} හිතනවා. ඔවුන් කරන හොඳ දේවල් මතක් කරන්න.", // 3
+                "{name}, {partner} ට ගැටුම් වැඩි බවක් දැනෙනවා. ප්‍රශ්න ආවම සන්සුන්ව කතා කරලා විසඳගන්න උත්සාහ කරන්න.", // 4
+                "{name}, තමන්ව තේරුම් ගන්නේ නෑ කියලා {partner} ට හිතෙනවා. ඔවුන් කියන දේ හොඳින් අහන්න.", // 5
+                "{name}, තමන් ගොඩක් මහන්සි වෙනවා කියලා {partner} ට හිතෙනවා. ඔබත් ඒ වගේම මහන්සි වෙන්න.", // 6
+                "{name}, අමාරු වෙලාවට ඔබෙන් සහයෝගයක් නෑ කියලා {partner} ට හිතෙනවා. ප්‍රශ්න තියෙන වෙලාවට ඔවුන් ගැන හොයලා බලන්න.", // 7
+                "{name}, ඔවුන්ගේ ජයග්‍රහණ වලදී ඔබ තව සතුටු වෙනවා දකින්න {partner} කැමතියි.", // 8
+                "{name}, ඔබ මත සම්පූර්ණයෙන්ම යැපෙන්න {partner} ට පොඩි බයක් තියෙනවා. විශ්වාසය ගොඩනගන්න." // 9
+            ]
         },
         resultTiers: {
             highTitle: "වාව්, ඔබ දෙදෙනා ඉතා හොඳින් සිටිනවා! 🌟",
@@ -115,11 +168,11 @@ const translations = {
             needsDesc: "ඔබේ පිළිතුරු වලින් පෙනෙන්නේ මේ මොහොතේ යම් දුරස් වීමක් ඇති බවයි. කලබල වෙන්න එපා, හැම සම්බන්ධතාවයකම අමාරු කාලවල් තියෙනවා."
         },
         dynamicText: {
-            overallText: "ඔබ සමස්තයක් ලෙස <strong>{score}%</strong> ක ලකුණු ප්‍රමාණයක් ලබාගෙන තියෙනවා! ",
-            advice_high: "<br><br>💡 <strong>ඔබට හොඳම උපදෙස:</strong> මේ ශක්තිමත් බැඳීම දිගටම පවත්වා ගන්න එකිනෙකා සමඟ කාලය ගත කිරීමට ප්‍රමුඛතාවය දෙන්න.",
-            advice_mod: "<br><br>💡 <strong>ඔබට හොඳම උපදෙස:</strong> ඔබට හොඳ පදනමක් තියෙනවා! ඔබේ අනාගත අරමුණු සහ එකිනෙකාට උදව් කරන්නේ කොහොමද කියලා කතා කරන්න මේ සතියේ කාලය වෙන් කරන්න.",
-            advice_grow: "<br><br>💡 <strong>ඔබට හොඳම උපදෙස:</strong> කුඩා දෛනික සෙනෙහස දැක්වීම් හරහා සමීප බව නැවත ගොඩනැගීමට අවධානය යොමු කරන්න. සරල 'ස්තූතියි' කීමක් විශාල වෙනසක් කරයි.",
-            advice_needs: "<br><br>💡 <strong>ඔබට හොඳම උපදෙස:</strong> ගැටුම් සාමාන්‍යයි, නමුත් ඔබ ඒවා විසඳන ආකාරය වැදගත්. කෝපය වැඩිවන විට ටිකක් නතර වීමට පුරුදු වන්න. ගැටලුවට එකට මුහුණ දෙන්න."
+            overallText: "සමස්ත ලකුණු ප්‍රමාණය <strong>{score}%</strong> යි! ",
+            advice_high: "<br><br>💡 <strong>හොඳම උපදෙස:</strong> මේ ශක්තිමත් බැඳීම දිගටම පවත්වා ගන්න එකිනෙකා සමඟ කාලය ගත කිරීමට ප්‍රමුඛතාවය දෙන්න.",
+            advice_mod: "<br><br>💡 <strong>හොඳම උපදෙස:</strong> ඔබට හොඳ පදනමක් තියෙනවා! ඔබේ අනාගත අරමුණු සහ එකිනෙකාට උදව් කරන්නේ කොහොමද කියලා කතා කරන්න මේ සතියේ කාලය වෙන් කරන්න.",
+            advice_grow: "<br><br>💡 <strong>හොඳම උපදෙස:</strong> කුඩා දෛනික සෙනෙහස දැක්වීම් හරහා සමීප බව නැවත ගොඩනැගීමට අවධානය යොමු කරන්න. සරල 'ස්තූතියි' කීමක් විශාල වෙනසක් කරයි.",
+            advice_needs: "<br><br>💡 <strong>හොඳම උපදෙස:</strong> ගැටුම් සාමාන්‍යයි, නමුත් ඔබ ඒවා විසඳන ආකාරය වැදගත්. කෝපය වැඩිවන විට ටිකක් නතර වීමට පුරුදු වන්න."
         },
         optionSets: {
             agreement: [
@@ -145,16 +198,16 @@ const translations = {
             ]
         },
         questions: [
-            { id: 'q1', text: 'ඔබේ සහකරු/සහකාරිය මේ බැඳීම සදාකාලිකවම තියාගන්න කැමතියි කියලා ඔබට හිතෙනවද?', weight: 85, optionSet: 'agreement', reverse: false },
-            { id: 'q2', text: 'ඔබේ සහකරු/සහකාරිය ඔබේ ජීවිතේට ලැබුණු එක ගැන ඔබට කොයිතරම් වාසනාවන්ත හැඟීමක් දැනෙනවද?', weight: 72, optionSet: 'agreement', reverse: false },
+            { id: 'q1', text: '{partner} මේ බැඳීම සදාකාලිකවම තියාගන්න කැමතියි කියලා ඔබට හිතෙනවද?', weight: 85, optionSet: 'agreement', reverse: false },
+            { id: 'q2', text: '{partner} ඔබේ ජීවිතේට ලැබුණු එක ගැන ඔබට කොයිතරම් වාසනාවන්ත හැඟීමක් දැනෙනවද?', weight: 72, optionSet: 'agreement', reverse: false },
             { id: 'q3', text: 'ඔබ දෙදෙනාගේ ලිංගික ජීවිතයේ සමීප බව ගැන ඔබ ඇත්තටම සතුටු වෙනවද?', weight: 71, optionSet: 'satisfaction', reverse: false },
-            { id: 'q4', text: 'මේ සම්බන්ධතාවය නිසා ඔබේ සහකරු/සහකාරිය ගොඩක් සතුටින් ඉන්නවා කියලා ඔබට හිතෙනවද?', weight: 70, optionSet: 'agreement', reverse: false },
-            { id: 'q5', text: 'ඇත්තම කියමු, ඔබ දෙදෙනා අතර කොයිතරම් නිතර රණ්ඩු ඇතිවෙනවද?', weight: 69, optionSet: 'frequency', reverse: true },
-            { id: 'q6', text: 'ඔබේ සහකරු/සහකාරියට ඔබව සහ ඔබේ අවශ්‍යතා හොඳටම තේරෙනවද?', weight: 69, optionSet: 'agreement', reverse: false },
+            { id: 'q4', text: 'මේ සම්බන්ධතාවය නිසා {partner} ගොඩක් සතුටින් ඉන්නවා කියලා ඔබට හිතෙනවද?', weight: 70, optionSet: 'agreement', reverse: false },
+            { id: 'q5', text: 'ඇත්තම කියමු, ඔබ සහ {partner} අතර කොයිතරම් නිතර රණ්ඩු ඇතිවෙනවද?', weight: 69, optionSet: 'frequency', reverse: true },
+            { id: 'q6', text: '{partner} ට ඔබව සහ ඔබේ අවශ්‍යතා හොඳටම තේරෙනවද?', weight: 69, optionSet: 'agreement', reverse: false },
             { id: 'q7', text: 'මේ සම්බන්ධතාවය සාර්ථක කරගන්න ඔබ ඔබේ මුළු හදවතින්ම, කාලය සහ ශ්‍රමය කැප කරලා තියෙනවද?', weight: 67, optionSet: 'agreement', reverse: false },
-            { id: 'q8', text: 'ප්‍රශ්න ආවම උදව්වට ඔබේ සහකරු/සහකාරිය අනිවාර්යයෙන්ම ඉන්නවා කියලා විශ්වාසද?', weight: 64, optionSet: 'agreement', reverse: false },
-            { id: 'q9', text: 'ඔබේ ජයග්‍රහණ වලදී ඔබේ සහකරු/සහකාරිය අවංකවම සතුටු වෙනවද?', weight: 58, optionSet: 'agreement', reverse: false },
-            { id: 'q10', text: 'ඕනෑම දෙයකදී ඔබේ සහකරු/සහකාරිය මත යැපෙන්න ඔබට කිසිම බයක්/චකිතයක් නැද්ද?', weight: 58, optionSet: 'agreement', reverse: false }
+            { id: 'q8', text: 'ප්‍රශ්න ආවම උදව්වට {partner} අනිවාර්යයෙන්ම ඉන්නවා කියලා විශ්වාසද?', weight: 64, optionSet: 'agreement', reverse: false },
+            { id: 'q9', text: 'ඔබේ ජයග්‍රහණ වලදී {partner} අවංකවම සතුටු වෙනවද?', weight: 58, optionSet: 'agreement', reverse: false },
+            { id: 'q10', text: 'ඕනෑම දෙයකදී {partner} මත යැපෙන්න ඔබට කිසිම බයක්/චකිතයක් නැද්ද?', weight: 58, optionSet: 'agreement', reverse: false }
         ]
     },
     ta: {
@@ -165,22 +218,47 @@ const translations = {
             startBtn: "தொடங்கலாம்! 🚀",
             prevBtn: "பின்னே",
             nextBtn: "அடுத்து",
-            resultsBtn: "என் முடிவுகளைக் காட்டு! 🎉",
+            resultsBtn: "முடிவுகளைக் காட்டு! 🎉",
             profileTitle: "உங்கள் முடிவுகள் இதோ! 💖",
+            nameTitle: "பெயர்களை உள்ளிடுக!",
+            nameDesc: "சிறந்த அனுபவத்தைப் பெற, உங்கள் பெயர்கள் என்ன?",
+            yourNameLabel: "உங்கள் பெயர்",
+            partnerNameLabel: "துணைவரின் பெயர்",
+            privacyGuarantee: "முழுமையாக குறியாக்கம் செய்யப்பட்டது. தரவுகள் உங்கள் சாதனத்தை விட்டு வெளியேறாது.",
             breakdownTitle: "முக்கிய 10 அறிவியல் காரணிகள்",
-            predCommitment: "துணைவரின் அர்ப்பணிப்பு பற்றிய உணர்வு",
+            dyadicTitle: "மேம்படுத்த வேண்டியவை 🌱",
+            predCommitment: "அர்ப்பணிப்பு",
             predAppreciation: "பாராட்டு",
             predSex: "பாலியல் திருப்தி",
-            predPartnerSat: "துணைவரின் திருப்தி பற்றிய உணர்வு",
+            predPartnerSat: "துணைவரின் திருப்தி",
             predConflict: "சண்டைகள் இல்லாத நிலை",
-            predResponsiveness: "துணைவரின் பதிலளிக்கும் தன்மை",
-            predInvestment: "உறவில் ஈடுபாடு",
-            predSupport: "பொதுவான ஆதரவு",
+            predResponsiveness: "பதிலளிக்கும் தன்மை",
+            predInvestment: "ஈடுபாடு",
+            predSupport: "ஆதரவு",
             predCapitalization: "வெற்றிகளைக் கொண்டாடுதல்",
             predAttachment: "ஆறுதல் மற்றும் பாதுகாப்பு",
             insightTitle: "ஒரு சிறிய அறிவியல் குறிப்பு 🧬",
-            insightDesc: "ஆய்வின்படி: 1) உங்கள் தனிப்பட்ட குணாதிசயங்களை விட உங்கள் உறவைப் பற்றி நீங்கள் எப்படி உணர்கிறீர்கள் என்பதே இங்கு மிகவும் முக்கியமானது. 2) எதிர்காலம் எப்படி இருக்கும் என்று எந்தவொரு மதிப்பீட்டாலும் சொல்ல முடியாது, எனவே இந்த முடிவுகள் உங்கள் தற்போதைய நிலையை மட்டுமே காட்டுகின்றன!",
-            retakeBtn: "மீண்டும் செய்யலாம்! 🔄"
+            viewMyBreakdown: "எனது விரிவான முடிவுகளைக் காண்க 📊",
+            insightDesc: "ஆய்வின்படி: 1) உங்கள் தனிப்பட்ட குணாதிசயங்களை விட உங்கள் உறவைப் பற்றி நீங்கள் எப்படி உணர்கிறீர்கள் என்பதே இங்கு மிகவும் முக்கியமானது. 2) எதிர்காலம் எப்படி இருக்கும் என்று எந்தவொரு மதிப்பீட்டாலும் சொல்ல முடியாது!",
+            retakeBtn: "மீண்டும் செய்யலாம்! 🔄",
+            viewMyBreakdown: "View my detailed breakdown 📊",
+            waShareP1: "{partner} -க்கு WhatsApp மூலம் பகிரவும் 💬",
+            waShareP2: "இறுதி முடிவுகளை {partner} -க்கு அனுப்பவும் 💬",
+            waMsgP1: "ஹாய் {nB}, {nA} மதிப்பீட்டை முடித்துவிட்டார்! உங்கள் முறையைத் தொடங்க இங்கே கிளிக் செய்யவும்: {link}",
+            waMsgP2: "ஹாய் {nA}, {nB} மதிப்பீட்டை முடித்துவிட்டார்! இறுதி முடிவுகளைப் பார்க்க இங்கே கிளிக் செய்யவும்: {link}",
+            greetingP2: "ஹாய் {nB}! {nA} மதிப்பீட்டை முடித்துவிட்டார். இப்போது உங்கள் முறை!",
+            dyadicAdviceStrings: [
+                "{name}, {partner} எதிர்காலத்தைப் பற்றி சற்று சந்தேகமாக உள்ளார். வெளிப்படையாகப் பேசுங்கள்.", // 0
+                "{name}, {partner} போதிய பாராட்டு கிடைக்கவில்லை என உணர்கிறார். சிறிய விஷயங்களுக்கும் நன்றி கூறுங்கள்.", // 1
+                "{name}, {partner} அதிக நெருக்கத்தை விரும்புகிறார். இதைப் பற்றி வெளிப்படையாகப் பேசுங்கள்.", // 2
+                "{name}, நீங்கள் முழுமையாக மகிழ்ச்சியாக இல்லை என்று {partner} நினைக்கிறார்.", // 3
+                "{name}, {partner} அதிக சண்டைகள் இருப்பதாக உணர்கிறார். கோபம் வரும்போது அமைதியாக இருக்கப் பழகுங்கள்.", // 4
+                "{name}, {partner} தன்னை நீங்கள் புரிந்துகொள்ளவில்லை என நினைக்கிறார். அவர்கள் கூறுவதைக் கவனமாகக் கேளுங்கள்.", // 5
+                "{name}, {partner} அதிக முயற்சி எடுப்பதாக உணர்கிறார். நீங்களும் அதே அளவு ஈடுபாடு காட்டுங்கள்.", // 6
+                "{name}, கடினமான நேரங்களில் உங்கள் ஆதரவு போதாது என {partner} நினைக்கிறார்.", // 7
+                "{name}, {partner} -ன் வெற்றிகளை நீங்கள் இன்னும் அதிகமாகக் கொண்டாட வேண்டும்.", // 8
+                "{name}, உங்களை முழுமையாகச் சார்ந்து இருக்க {partner} சற்று தயங்குகிறார். நம்பிக்கையை உருவாக்குங்கள்." // 9
+            ]
         },
         resultTiers: {
             highTitle: "வாவ், நீங்கள் இருவரும் மிகவும் சிறப்பாக இருக்கிறீர்கள்! 🌟",
@@ -193,11 +271,11 @@ const translations = {
             needsDesc: "இந்த தருணத்தில் நீங்கள் சில கருத்து வேறுபாடுகளை சந்திப்பதாக உங்கள் பதில்கள் கூறுகின்றன. கவலைப்பட வேண்டாம், ஒவ்வொரு உறவிலும் கடினமான காலங்கள் உண்டு."
         },
         dynamicText: {
-            overallText: "நீங்கள் ஒட்டுமொத்தமாக <strong>{score}%</strong> மதிப்பெண்களைப் பெற்றுள்ளீர்கள்! ",
-            advice_high: "<br><br>💡 <strong>உங்களுக்கான சிறந்த ஆலோசனை:</strong> நீங்கள் மிகச் சிறப்பாகச் செய்கிறீர்கள்! இந்த வலுவான பிணைப்பைத் தொடர, தொடர்ந்து ஒருவருக்கொருவர் நேரம் ஒதுக்குங்கள்.",
-            advice_mod: "<br><br>💡 <strong>உங்களுக்கான சிறந்த ஆலோசனை:</strong> உங்களுக்கு ஒரு உறுதியான அடிப்படை உள்ளது! உங்கள் எதிர்கால இலக்குகள் குறித்தும், ஒருவருக்கொருவர் எப்படி ஆதரவளிக்கலாம் என்பது குறித்தும் பேச இந்த வாரம் நேரம் ஒதுக்குங்கள்.",
-            advice_grow: "<br><br>💡 <strong>உங்களுக்கான சிறந்த ஆலோசனை:</strong> சிறிய, அன்றாட பாசச் செயல்கள் மூலம் நெருக்கத்தை மீண்டும் உருவாக்குவதில் கவனம் செலுத்துங்கள். ஒரு எளிய 'நன்றி' பெரிய மாற்றத்தை ஏற்படுத்தும்.",
-            advice_needs: "<br><br>💡 <strong>உங்களுக்கான சிறந்த ஆலோசனை:</strong> சண்டைகள் இயல்பானவை, ஆனால் அவற்றை நீங்கள் எப்படி கையாளுகிறீர்கள் என்பதே முக்கியம். கோபம் அதிகரிக்கும் போது சற்று நேரம் அமைதியாக இருக்க பழகுங்கள். இணைந்து பிரச்சனையை எதிர்கொள்ளுங்கள்."
+            overallText: "ஒட்டுமொத்த மதிப்பெண் <strong>{score}%</strong>! ",
+            advice_high: "<br><br>💡 <strong>சிறந்த ஆலோசனை:</strong> நீங்கள் மிகச் சிறப்பாகச் செய்கிறீர்கள்! இந்த வலுவான பிணைப்பைத் தொடர, தொடர்ந்து ஒருவருக்கொருவர் நேரம் ஒதுக்குங்கள்.",
+            advice_mod: "<br><br>💡 <strong>சிறந்த ஆலோசனை:</strong> உங்களுக்கு ஒரு உறுதியான அடிப்படை உள்ளது! உங்கள் எதிர்கால இலக்குகள் குறித்தும் பேச நேரம் ஒதுக்குங்கள்.",
+            advice_grow: "<br><br>💡 <strong>சிறந்த ஆலோசனை:</strong> சிறிய பாசச் செயல்கள் மூலம் நெருக்கத்தை மீண்டும் உருவாக்குவதில் கவனம் செலுத்துங்கள்.",
+            advice_needs: "<br><br>💡 <strong>சிறந்த ஆலோசனை:</strong> சண்டைகள் இயல்பானவை. கோபம் அதிகரிக்கும் போது சற்று நேரம் அமைதியாக இருக்க பழகுங்கள்."
         },
         optionSets: {
             agreement: [
@@ -223,16 +301,16 @@ const translations = {
             ]
         },
         questions: [
-            { id: 'q1', text: 'உங்கள் துணைவர் இந்த உறவை என்றென்றும் தொடர விரும்புவதாக நீங்கள் நினைக்கிறீர்களா?', weight: 85, optionSet: 'agreement', reverse: false },
-            { id: 'q2', text: 'உங்கள் துணைவர் உங்கள் வாழ்வில் இருப்பதற்காக நீங்கள் எவ்வளவு அதிர்ஷ்டசாலியாக உணர்கிறீர்கள்?', weight: 72, optionSet: 'agreement', reverse: false },
+            { id: 'q1', text: '{partner} இந்த உறவை என்றென்றும் தொடர விரும்புவதாக நீங்கள் நினைக்கிறீர்களா?', weight: 85, optionSet: 'agreement', reverse: false },
+            { id: 'q2', text: '{partner} உங்கள் வாழ்வில் இருப்பதற்காக நீங்கள் எவ்வளவு அதிர்ஷ்டசாலியாக உணர்கிறீர்கள்?', weight: 72, optionSet: 'agreement', reverse: false },
             { id: 'q3', text: 'உங்கள் பாலியல் வாழ்க்கையின் நெருக்கம் மற்றும் ஈர்ப்பு குறித்து நீங்கள் மகிழ்ச்சியாக இருக்கிறீர்களா?', weight: 71, optionSet: 'satisfaction', reverse: false },
-            { id: 'q4', text: 'இந்த உறவு உங்கள் துணைவருக்கு மிகுந்த மகிழ்ச்சியைத் தருகிறது என்று நினைக்கிறீர்களா?', weight: 70, optionSet: 'agreement', reverse: false },
-            { id: 'q5', text: 'உண்மையாக சொல்லுங்கள், நீங்கள் இருவரும் எவ்வளவு அடிக்கடி சண்டையிட்டுக் கொள்கிறீர்கள்?', weight: 69, optionSet: 'frequency', reverse: true },
-            { id: 'q6', text: 'உங்கள் துணைவர் உங்களையும் உங்கள் தேவைகளையும் முழுமையாகப் புரிந்து கொள்கிறாரா?', weight: 69, optionSet: 'agreement', reverse: false },
-            { id: 'q7', text: 'இந்த உறவை வெற்றிபெறச் செய்ய உங்கள் முழு இதயத்தையும், நேரத்தையும், ஆற்றலையும் முதலீடு செய்துள்ளீர்களா?', weight: 67, optionSet: 'agreement', reverse: false },
-            { id: 'q8', text: 'கடினமான நேரங்களில் உங்கள் துணைவரின் ஆதரவை நீங்கள் எப்போதும் நம்பலாமா?', weight: 64, optionSet: 'agreement', reverse: false },
-            { id: 'q9', text: 'உங்கள் வெற்றிகளை உங்கள் துணைவர் உண்மையிலேயே கொண்டாடுகிறாரா?', weight: 58, optionSet: 'agreement', reverse: false },
-            { id: 'q10', text: 'எதுவாக இருந்தாலும் உங்கள் துணைவரை சார்ந்து இருப்பதில் உங்களுக்கு முழுமையான சௌகரியம் உள்ளதா?', weight: 58, optionSet: 'agreement', reverse: false }
+            { id: 'q4', text: 'இந்த உறவு {partner} -க்கு மிகுந்த மகிழ்ச்சியைத் தருகிறது என்று நினைக்கிறீர்களா?', weight: 70, optionSet: 'agreement', reverse: false },
+            { id: 'q5', text: 'உண்மையாக சொல்லுங்கள், நீங்களும் {partner} -ம் எவ்வளவு அடிக்கடி சண்டையிட்டுக் கொள்கிறீர்கள்?', weight: 69, optionSet: 'frequency', reverse: true },
+            { id: 'q6', text: '{partner} உங்களையும் உங்கள் தேவைகளையும் முழுமையாகப் புரிந்து கொள்கிறாரா?', weight: 69, optionSet: 'agreement', reverse: false },
+            { id: 'q7', text: 'இந்த உறவை வெற்றிபெறச் செய்ய உங்கள் முழு இதயத்தையும் முதலீடு செய்துள்ளீர்களா?', weight: 67, optionSet: 'agreement', reverse: false },
+            { id: 'q8', text: 'கடினமான நேரங்களில் {partner} -ன் ஆதரவை நீங்கள் எப்போதும் நம்பலாமா?', weight: 64, optionSet: 'agreement', reverse: false },
+            { id: 'q9', text: 'உங்கள் வெற்றிகளை {partner} உண்மையிலேயே கொண்டாடுகிறாரா?', weight: 58, optionSet: 'agreement', reverse: false },
+            { id: 'q10', text: 'எதுவாக இருந்தாலும் {partner} -ஐ சார்ந்து இருப்பதில் உங்களுக்கு முழுமையான சௌகரியம் உள்ளதா?', weight: 58, optionSet: 'agreement', reverse: false }
         ]
     }
 };
@@ -244,17 +322,24 @@ const colorPalettes = {
     needs: { primary: '#ef4444', secondary: '#e11d48', bg: '#4c0519' }
 };
 
-let questions = translations[currentLang].questions;
+let questions = [];
 
-// State
+// App State
+let appMode = 'p1'; // 'p1', 'p2', 'final'
+let p1Data = null; // { nA, nB, answers }
+let p2Data = null; // { answers }
+let myName = '';
+let theirName = '';
 let currentQuestionIndex = 0;
-let answers = new Array(questions.length).fill(null);
+let answers = [];
 
 // DOM Elements
 const langScreen = document.getElementById('lang-screen');
+const nameScreen = document.getElementById('name-screen');
 const introScreen = document.getElementById('intro-screen');
 const quizScreen = document.getElementById('quiz-screen');
 const resultScreen = document.getElementById('result-screen');
+const namesNextBtn = document.getElementById('names-next-btn');
 const startBtn = document.getElementById('start-btn');
 const nextBtn = document.getElementById('next-btn');
 const prevBtn = document.getElementById('prev-btn');
@@ -262,12 +347,107 @@ const restartBtn = document.getElementById('restart-btn');
 const questionText = document.getElementById('question-text');
 const optionsContainer = document.getElementById('options-container');
 const progressBar = document.getElementById('progress-bar');
+const waShareBtn = document.getElementById('wa-share-btn');
+
+
+document.getElementById('view-my-breakdown-btn').addEventListener('click', function() {
+    this.classList.add('hidden');
+    document.getElementById('breakdown-container').classList.remove('hidden');
+});
+
+// --- E2E Encryption (Web Crypto API) ---
+async function generateKey() {
+    return await window.crypto.subtle.generateKey({ name: "AES-GCM", length: 256 }, true, ["encrypt", "decrypt"]);
+}
+async function exportKey(key) {
+    const exported = await window.crypto.subtle.exportKey("raw", key);
+    return btoa(String.fromCharCode(...new Uint8Array(exported))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
+async function importKey(base64url) {
+    let base64 = base64url.replace(/-/g, '+').replace(/_/g, '/');
+    while (base64.length % 4) base64 += '=';
+    const binary = atob(base64);
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+    return await window.crypto.subtle.importKey("raw", bytes, "AES-GCM", true, ["encrypt", "decrypt"]);
+}
+async function encryptData(data, key) {
+    const iv = window.crypto.getRandomValues(new Uint8Array(12));
+    const encoded = new TextEncoder().encode(JSON.stringify(data));
+    const encrypted = await window.crypto.subtle.encrypt({ name: "AES-GCM", iv: iv }, key, encoded);
+    const ivHex = Array.from(iv).map(b => b.toString(16).padStart(2, '0')).join('');
+    const cipherBase64 = btoa(String.fromCharCode(...new Uint8Array(encrypted))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+    return `${ivHex}.${cipherBase64}`;
+}
+async function decryptData(encryptedString, key) {
+    const [ivHex, cipherBase64] = encryptedString.split('.');
+    const iv = new Uint8Array(ivHex.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
+    let base64 = cipherBase64.replace(/-/g, '+').replace(/_/g, '/');
+    while (base64.length % 4) base64 += '=';
+    const binary = atob(base64);
+    const encryptedBytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) encryptedBytes[i] = binary.charCodeAt(i);
+    const decrypted = await window.crypto.subtle.decrypt({ name: "AES-GCM", iv: iv }, key, encryptedBytes);
+    return JSON.parse(new TextDecoder().decode(decrypted));
+}
+// ---------------------------------------
+
+window.onload = async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const hashParams = new URLSearchParams(window.location.hash.substring(1));
+    const keyString = hashParams.get('key');
+    
+    if (urlParams.has('q') && keyString) {
+        try {
+            const key = await importKey(keyString);
+            const decrypted = await decryptData(urlParams.get('q'), key);
+            
+            if (decrypted.mode === 'p1') {
+                appMode = 'p2';
+                p1Data = decrypted;
+                myName = p1Data.nB;
+                theirName = p1Data.nA;
+                currentLang = p1Data.lang || 'en';
+                
+                // Skip Name screen, go straight to Intro with custom greeting
+                setLanguage(currentLang);
+                langScreen.classList.remove('active');
+                langScreen.classList.add('hidden');
+                
+                // Set custom intro greeting
+                let greeting = translations[currentLang].ui.greetingP2.replace('{nA}', theirName).replace('{nB}', myName);
+                document.querySelector('#intro-screen .intro-card').innerHTML = `<p>${greeting}</p><p>${translations[currentLang].ui.introDesc2}</p>`;
+                
+                introScreen.classList.remove('hidden');
+                introScreen.classList.add('active');
+                
+            } else if (decrypted.mode === 'final') {
+                appMode = 'final';
+                p1Data = decrypted.p1;
+                p2Data = decrypted.p2;
+                myName = p1Data.nA;
+                theirName = p1Data.nB;
+                currentLang = decrypted.lang || 'en';
+                
+                // Skip everything, go straight to Final Results
+                setLanguage(currentLang);
+                langScreen.classList.remove('active');
+                langScreen.classList.add('hidden');
+                showResults();
+            }
+        } catch(e) {
+            console.error("Decryption failed", e);
+            alert("Invalid or broken link.");
+        }
+    }
+};
 
 function setLanguage(lang) {
     currentLang = lang;
     questions = translations[lang].questions;
+    if(answers.length === 0) answers = new Array(questions.length).fill(null);
     
-    // Update all elements with data-i18n
+    // Update static i18n
     const elements = document.querySelectorAll('[data-i18n]');
     elements.forEach(el => {
         const key = el.getAttribute('data-i18n');
@@ -276,48 +456,57 @@ function setLanguage(lang) {
         }
     });
     
-    // Move to intro screen
-    langScreen.classList.remove('active');
-    setTimeout(() => {
-        langScreen.classList.add('hidden');
-        introScreen.classList.remove('hidden');
-        void introScreen.offsetWidth; // Reflow
-        introScreen.classList.add('active');
-    }, 400);
+    if (appMode === 'p1') {
+        langScreen.classList.remove('active');
+        setTimeout(() => {
+            langScreen.classList.add('hidden');
+            nameScreen.classList.remove('hidden');
+            void nameScreen.offsetWidth;
+            nameScreen.classList.add('active');
+        }, 400);
+    }
 }
 
-// Event Listeners
-startBtn.addEventListener('click', startQuiz);
-nextBtn.addEventListener('click', nextQuestion);
-prevBtn.addEventListener('click', prevQuestion);
-restartBtn.addEventListener('click', restartQuiz);
+namesNextBtn.addEventListener('click', () => {
+    myName = document.getElementById('your-name').value.trim() || 'Partner A';
+    theirName = document.getElementById('partner-name').value.trim() || 'Partner B';
+    
+    nameScreen.classList.remove('active');
+    setTimeout(() => {
+        nameScreen.classList.add('hidden');
+        introScreen.classList.remove('hidden');
+        void introScreen.offsetWidth;
+        introScreen.classList.add('active');
+    }, 400);
+});
 
-function startQuiz() {
+startBtn.addEventListener('click', () => {
     introScreen.classList.remove('active');
     setTimeout(() => {
         introScreen.classList.add('hidden');
         quizScreen.classList.remove('hidden');
-        void quizScreen.offsetWidth; // Reflow
+        void quizScreen.offsetWidth;
         quizScreen.classList.add('active');
         renderQuestion();
     }, 400);
-}
+});
+
+nextBtn.addEventListener('click', nextQuestion);
+prevBtn.addEventListener('click', prevQuestion);
+restartBtn.addEventListener('click', restartQuiz);
 
 function renderQuestion() {
     const q = questions[currentQuestionIndex];
-    questionText.textContent = `${currentQuestionIndex + 1}. ${q.text}`;
+    let qText = q.text.replace('{partner}', `<strong>${theirName}</strong>`);
+    questionText.innerHTML = `${currentQuestionIndex + 1}. ${qText}`;
     
-    // Progress Bar
     const progress = (currentQuestionIndex / questions.length) * 100;
     progressBar.style.width = `${progress}%`;
     
-    // Options Contextual Personalization
     const options = translations[currentLang].optionSets[q.optionSet];
-    
     optionsContainer.innerHTML = '';
     options.forEach(opt => {
         const isSelected = answers[currentQuestionIndex] === opt.value;
-        
         const label = document.createElement('label');
         label.className = `option-label ${isSelected ? 'selected' : ''}`;
         
@@ -326,40 +515,25 @@ function renderQuestion() {
         input.name = 'question_option';
         input.value = opt.value;
         input.checked = isSelected;
-        
-        input.addEventListener('change', () => selectOption(opt.value));
+        input.addEventListener('change', () => {
+            answers[currentQuestionIndex] = opt.value;
+            renderQuestion();
+            if (currentQuestionIndex < questions.length - 1) setTimeout(nextQuestion, 400);
+            else nextBtn.disabled = false;
+        });
         
         label.appendChild(input);
         label.appendChild(document.createTextNode(opt.label));
         optionsContainer.appendChild(label);
     });
     
-    // Buttons
     prevBtn.disabled = currentQuestionIndex === 0;
-    
-    if (currentQuestionIndex === questions.length - 1) {
-        nextBtn.innerHTML = translations[currentLang].ui.resultsBtn;
-    } else {
-        nextBtn.innerHTML = translations[currentLang].ui.nextBtn;
-    }
-    
+    nextBtn.innerHTML = currentQuestionIndex === questions.length - 1 ? translations[currentLang].ui.resultsBtn : translations[currentLang].ui.nextBtn;
     nextBtn.disabled = answers[currentQuestionIndex] === null;
-}
-
-function selectOption(val) {
-    answers[currentQuestionIndex] = val;
-    renderQuestion();
-    // Auto-advance if not last question
-    if (currentQuestionIndex < questions.length - 1) {
-        setTimeout(nextQuestion, 400);
-    } else {
-        nextBtn.disabled = false;
-    }
 }
 
 function nextQuestion() {
     if (answers[currentQuestionIndex] === null) return;
-    
     if (currentQuestionIndex < questions.length - 1) {
         quizScreen.classList.remove('active');
         setTimeout(() => {
@@ -371,7 +545,6 @@ function nextQuestion() {
         showResults();
     }
 }
-
 function prevQuestion() {
     if (currentQuestionIndex > 0) {
         quizScreen.classList.remove('active');
@@ -383,24 +556,14 @@ function prevQuestion() {
     }
 }
 
-function calculateScore() {
-    let totalScore = 0;
-    let totalMax = 0;
-    
+function calculateScore(ansArray) {
+    let totalScore = 0; let totalMax = 0;
     questions.forEach((q, index) => {
-        let val = answers[index];
-        // Handle reverse scored items
-        if (q.reverse) {
-            val = 6 - val; // 5 becomes 1, 1 becomes 5
-        }
-        
-        let weightedScore = val * q.weight;
-        let weightedMax = 5 * q.weight;
-        
-        totalScore += weightedScore;
-        totalMax += weightedMax;
+        let val = ansArray[index];
+        if (q.reverse) val = 6 - val;
+        totalScore += val * q.weight;
+        totalMax += 5 * q.weight;
     });
-    
     return Math.round((totalScore / totalMax) * 100);
 }
 
@@ -411,132 +574,194 @@ function applyTheme(palette) {
     document.documentElement.style.setProperty('--bg-color', palette.bg);
 }
 
-function showResults() {
-    const score = calculateScore();
+async function showResults() {
+    let finalScore = 0;
     
-    // Apply Dynamic Theme Based on Score
+    if (appMode === 'p1') {
+        finalScore = calculateScore(answers);
+    } else if (appMode === 'p2') {
+        p2Data = { answers: [...answers] };
+        finalScore = Math.round((calculateScore(p1Data.answers) + calculateScore(p2Data.answers)) / 2);
+    } else if (appMode === 'final') {
+        finalScore = Math.round((calculateScore(p1Data.answers) + calculateScore(p2Data.answers)) / 2);
+    }
+
     let tierKey = '';
-    if (score >= 80) { applyTheme(colorPalettes.high); tierKey = 'high'; }
-    else if (score >= 60) { applyTheme(colorPalettes.mod); tierKey = 'mod'; }
-    else if (score >= 40) { applyTheme(colorPalettes.grow); tierKey = 'grow'; }
+    if (finalScore >= 80) { applyTheme(colorPalettes.high); tierKey = 'high'; }
+    else if (finalScore >= 60) { applyTheme(colorPalettes.mod); tierKey = 'mod'; }
+    else if (finalScore >= 40) { applyTheme(colorPalettes.grow); tierKey = 'grow'; }
     else { applyTheme(colorPalettes.needs); tierKey = 'needs'; }
     
-    quizScreen.classList.remove('active');
-    setTimeout(() => {
+    if(appMode !== 'final') {
+        quizScreen.classList.remove('active');
         quizScreen.classList.add('hidden');
-        resultScreen.classList.remove('hidden');
-        void resultScreen.offsetWidth; // Reflow
-        resultScreen.classList.add('active');
+    }
+    
+    resultScreen.classList.remove('hidden');
+    void resultScreen.offsetWidth;
+    resultScreen.classList.add('active');
+    
+    animateScore(finalScore);
+    
+    const titleEl = document.getElementById('result-title');
+    const descEl = document.getElementById('result-description');
+    const trans = translations[currentLang];
+    
+    titleEl.textContent = trans.resultTiers[tierKey + 'Title'];
+    descEl.innerHTML = trans.dynamicText.overallText.replace('{score}', finalScore) + trans.resultTiers[tierKey + 'Desc'] + trans.dynamicText['advice_' + tierKey];
+    
+    // Setup WhatsApp Button
+    if (appMode === 'p1') {
+        waShareBtn.classList.remove('hidden');
+        waShareBtn.textContent = trans.ui.waShareP1.replace('{partner}', theirName);
+        const data = { mode: 'p1', nA: myName, nB: theirName, answers: answers, lang: currentLang };
+        const key = await generateKey();
+        const encrypted = await encryptData(data, key);
+        const keyStr = await exportKey(key);
+        const link = `${window.location.origin}${window.location.pathname}?q=${encrypted}#key=${keyStr}`;
+        const msg = trans.ui.waMsgP1.replace('{nA}', myName).replace('{nB}', theirName).replace('{link}', link);
+        waShareBtn.href = `https://wa.me/?text=${encodeURIComponent(msg)}`;
+    } 
+    else if (appMode === 'p2') {
+        waShareBtn.classList.remove('hidden');
+        waShareBtn.textContent = trans.ui.waShareP2.replace('{partner}', theirName);
+        const data = { mode: 'final', p1: p1Data, p2: p2Data, lang: currentLang };
+        const key = await generateKey();
+        const encrypted = await encryptData(data, key);
+        const keyStr = await exportKey(key);
+        const link = `${window.location.origin}${window.location.pathname}?q=${encrypted}#key=${keyStr}`;
+        const msg = trans.ui.waMsgP2.replace('{nA}', theirName).replace('{nB}', myName).replace('{link}', link);
+        waShareBtn.href = `https://wa.me/?text=${encodeURIComponent(msg)}`;
         
-        // Animate score counter
-        animateScore(score);
+        generateDyadicAdvice(p1Data.answers, p2Data.answers, p1Data.nA, p1Data.nB);
+    }
+    else if (appMode === 'final') {
+        waShareBtn.classList.add('hidden'); // Don't share again
+        generateDyadicAdvice(p1Data.answers, p2Data.answers, myName, theirName);
+    }
+    
+    if (appMode === 'p1') {
+        document.getElementById('breakdown-container').classList.remove('hidden');
+        buildBreakdownUI();
+    } else {
+        document.getElementById('breakdown-container').classList.add('hidden');
+    }
+}
+
+function generateDyadicAdvice(ans1, ans2, name1, name2) {
+    const advBox = document.getElementById('couples-advice-box');
+    advBox.classList.remove('hidden');
+    
+    const adviceStrings = translations[currentLang].ui.dyadicAdviceStrings;
+    
+    // Find where P1 scored lowest (meaning P1 is unhappy about this). We advise P2.
+    let p1LowestIdx = 0; let p1Min = 999;
+    // Find where P2 scored lowest. We advise P1.
+    let p2LowestIdx = 0; let p2Min = 999;
+    
+    for(let i=0; i<10; i++) {
+        let v1 = ans1[i]; if(questions[i].reverse) v1 = 6 - v1;
+        let v2 = ans2[i]; if(questions[i].reverse) v2 = 6 - v2;
         
-        // Set dynamic text
-        const titleEl = document.getElementById('result-title');
-        const descEl = document.getElementById('result-description');
-        const trans = translations[currentLang];
-        const tiers = trans.resultTiers;
-        const dynText = trans.dynamicText;
-        
-        if (tierKey === 'high') {
-            titleEl.textContent = tiers.highTitle;
-        } else if (tierKey === 'mod') {
-            titleEl.textContent = tiers.modTitle;
-        } else if (tierKey === 'grow') {
-            titleEl.textContent = tiers.growTitle;
-        } else {
-            titleEl.textContent = tiers.needsTitle;
-        }
-        
-        const tierDesc = tiers[tierKey + 'Desc'];
-        
-        // Construct highly personalized content
-        const introPhrase = dynText.overallText.replace('{score}', score);
-        
-        // Inject Custom Advice Based on Tier
-        const customAdvice = dynText['advice_' + tierKey];
-        
-        descEl.innerHTML = introPhrase + tierDesc + customAdvice;
-        
-        // Animate ALL 10 predictor bars
-        setTimeout(() => {
-            const top10 = [];
-            for (let i = 0; i < 10; i++) {
-                let val = answers[i];
-                if (questions[i].reverse) {
-                    val = 6 - val;
-                }
-                const pct = Math.round(((val - 1) / 4) * 100);
-                top10.push(pct);
+        if (v1 < p1Min) { p1Min = v1; p1LowestIdx = i; }
+        if (v2 < p2Min) { p2Min = v2; p2LowestIdx = i; }
+    }
+    
+    // Advice for Partner 1 (based on Partner 2's lowest score)
+    let adv1 = adviceStrings[p2LowestIdx].replace('{name}', name1).replace('{partner}', name2);
+    // Advice for Partner 2 (based on Partner 1's lowest score)
+    let adv2 = adviceStrings[p1LowestIdx].replace('{name}', name2).replace('{partner}', name1);
+    
+    document.getElementById('adv-name1').textContent = name1 + ":";
+    document.getElementById('adv-text1').textContent = adv1;
+    
+    document.getElementById('adv-name2').textContent = name2 + ":";
+    document.getElementById('adv-text2').textContent = adv2;
+}
+
+function buildBreakdownUI() {
+    const bdContainer = document.getElementById('breakdown-container');
+    const bdHeader = document.getElementById('bd-header');
+    
+    // Clear existing breakdown items (keep header)
+    bdContainer.innerHTML = '';
+    bdContainer.appendChild(bdHeader);
+    
+    const predKeys = ['predCommitment','predAppreciation','predSex','predPartnerSat','predConflict','predResponsiveness','predInvestment','predSupport','predCapitalization','predAttachment'];
+    
+    setTimeout(() => {
+        for (let i = 0; i < 10; i++) {
+            // Calculate percentages
+            let val1 = appMode === 'p1' ? answers[i] : p1Data.answers[i];
+            if (questions[i].reverse) val1 = 6 - val1;
+            let pct1 = Math.round(((val1 - 1) / 4) * 100);
+            
+            let pct2 = null;
+            if (appMode === 'p2' || appMode === 'final') {
+                let val2 = p2Data.answers[i];
+                if (questions[i].reverse) val2 = 6 - val2;
+                pct2 = Math.round(((val2 - 1) / 4) * 100);
             }
             
-            for (let i = 0; i < 10; i++) {
-                const bar = document.getElementById('bar-pred' + (i+1));
-                const valEl = document.getElementById('val-pred' + (i+1));
-                
-                bar.style.width = top10[i] + '%';
-                valEl.textContent = top10[i] + '%';
-                
-                // Color individual bars based on their score
-                let p = '';
-                let s = '';
-                if (top10[i] >= 80) { p = colorPalettes.high.primary; s = colorPalettes.high.secondary; }
-                else if (top10[i] >= 60) { p = colorPalettes.mod.primary; s = colorPalettes.mod.secondary; }
-                else if (top10[i] >= 40) { p = colorPalettes.grow.primary; s = colorPalettes.grow.secondary; }
-                else { p = colorPalettes.needs.primary; s = colorPalettes.needs.secondary; }
-                
-                bar.style.background = `linear-gradient(90deg, ${p}, ${s})`;
-                valEl.style.color = p;
+            // Build UI
+            const item = document.createElement('div');
+            item.className = 'breakdown-item';
+            
+            const titleStr = translations[currentLang].ui[predKeys[i]];
+            
+            let html = `<div class="breakdown-header"><span class="bd-title">${titleStr}</span></div>`;
+            
+            // P1 Bar
+            let p1Color = getColorForPct(pct1);
+            let nameA = (appMode === 'p1') ? myName : p1Data.nA;
+            html += `
+                <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:2px; color:#94a3b8;">
+                    <span>${nameA}</span><span style="color:${p1Color.p}; font-weight:bold;">${pct1}%</span>
+                </div>
+                <div class="bd-bar-bg" style="margin-bottom: ${pct2 !== null ? '8px' : '0'};">
+                    <div class="bd-bar" style="width: ${pct1}%; background: linear-gradient(90deg, ${p1Color.p}, ${p1Color.s});"></div>
+                </div>
+            `;
+            
+            // P2 Bar (if couples mode)
+            if (pct2 !== null) {
+                let p2Color = getColorForPct(pct2);
+                let nameB = (appMode === 'p1') ? theirName : p1Data.nB;
+                html += `
+                    <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:2px; color:#94a3b8;">
+                        <span>${nameB}</span><span style="color:${p2Color.p}; font-weight:bold;">${pct2}%</span>
+                    </div>
+                    <div class="bd-bar-bg">
+                        <div class="bd-bar" style="width: ${pct2}%; background: linear-gradient(90deg, ${p2Color.p}, ${p2Color.s});"></div>
+                    </div>
+                `;
             }
-        }, 500);
-        
-    }, 400);
+            
+            item.innerHTML = html;
+            bdContainer.appendChild(item);
+        }
+    }, 500);
+}
+
+function getColorForPct(pct) {
+    if (pct >= 80) return { p: colorPalettes.high.primary, s: colorPalettes.high.secondary };
+    if (pct >= 60) return { p: colorPalettes.mod.primary, s: colorPalettes.mod.secondary };
+    if (pct >= 40) return { p: colorPalettes.grow.primary, s: colorPalettes.grow.secondary };
+    return { p: colorPalettes.needs.primary, s: colorPalettes.needs.secondary };
 }
 
 function animateScore(targetScore) {
     const finalScoreEl = document.getElementById('final-score');
     const scoreCircle = document.querySelector('.score-circle');
-    
     let current = 0;
-    const duration = 1500;
-    const interval = 20;
-    const step = targetScore / (duration / interval);
-    
     const timer = setInterval(() => {
-        current += step;
-        if (current >= targetScore) {
-            current = targetScore;
-            clearInterval(timer);
-        }
-        
+        current += (targetScore / 75);
+        if (current >= targetScore) { current = targetScore; clearInterval(timer); }
         finalScoreEl.textContent = Math.round(current);
         scoreCircle.style.setProperty('--score', current);
-    }, interval);
+    }, 20);
 }
 
 function restartQuiz() {
-    currentQuestionIndex = 0;
-    answers.fill(null);
-    
-    // Reset Theme to Default
-    applyTheme({ primary: '#ec4899', secondary: '#8b5cf6', bg: '#0f172a' });
-    
-    resultScreen.classList.remove('active');
-    setTimeout(() => {
-        resultScreen.classList.add('hidden');
-        langScreen.classList.remove('hidden');
-        void langScreen.offsetWidth;
-        langScreen.classList.add('active');
-        
-        const scoreCircle = document.querySelector('.score-circle');
-        scoreCircle.style.setProperty('--score', 0);
-        document.getElementById('final-score').textContent = '0';
-        
-        // Reset all 10 predictor bars
-        for (let i = 1; i <= 10; i++) {
-            document.getElementById('bar-pred' + i).style.width = '0%';
-            document.getElementById('val-pred' + i).textContent = '0%';
-        }
-        
-    }, 400);
+    window.location.href = window.location.origin + window.location.pathname;
 }

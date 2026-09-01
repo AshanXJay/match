@@ -3,159 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Relationship Quality Assessment based on Joel et al. (2020) Study">
-    <title>Relationship Quality Matcher</title>
+    <title>Relationship Matcher ✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Outfit:wght@500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="background-elements">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
+    
+    <!-- Animated Background -->
+    <div class="bg-mesh">
+        <div class="bg-orb orb-1"></div>
+        <div class="bg-orb orb-2"></div>
+        <div class="bg-orb orb-3"></div>
     </div>
     
-    <main class="container">
-        <!-- Lang Screen -->
-        <section id="lang-screen" class="card active">
-            <h1 style="font-size: 1.8rem; text-align: center;">Select Language<br>භාෂාව තෝරන්න<br>மொழியைத் தேர்ந்தெடுக்கவும்</h1>
-            <div class="lang-buttons" style="display: flex; flex-direction: column; gap: 16px; margin-top: 32px;">
-                <button class="primary-btn" onclick="setLanguage('si')">සිංහල</button>
-                <button class="primary-btn" onclick="setLanguage('ta')">தமிழ்</button>
-                <button class="primary-btn" onclick="setLanguage('en')">English</button>
+    <div class="app-container">
+        
+        <!-- Language Selection Screen -->
+        <div class="screen active" id="lang-screen">
+            <h1 class="glow-text">Relationship Matcher ✨</h1>
+            <p>Select your language to begin:</p>
+            <div class="lang-options">
+                <button class="btn" onclick="setLanguage('si')">සිංහල</button>
+                <button class="btn" onclick="setLanguage('ta')">தமிழ்</button>
+                <button class="btn" onclick="setLanguage('en')">English</button>
             </div>
-        </section>
+        </div>
+
+        <!-- Name Screen -->
+        <div class="screen hidden" id="name-screen">
+            <h2 data-i18n="nameTitle">Let's personalize this!</h2>
+            <p data-i18n="nameDesc" class="subtitle">To give you the best experience, what are your names?</p>
+            
+            <div class="input-group">
+                <label data-i18n="yourNameLabel" for="your-name">Your Name</label>
+                <input type="text" id="your-name" placeholder="E.g. Sarah" maxlength="20">
+            </div>
+            
+            <div class="input-group">
+                <label data-i18n="partnerNameLabel" for="partner-name">Partner's Name</label>
+                <input type="text" id="partner-name" placeholder="E.g. John" maxlength="20">
+            </div>
+            
+            <div class="privacy-badge">
+                <span class="icon">🔒</span>
+                <span data-i18n="privacyGuarantee">End-to-End Encrypted. Your names and answers never leave your devices.</span>
+            </div>
+
+            <button class="btn" id="names-next-btn" data-i18n="nextBtn">Next</button>
+        </div>
 
         <!-- Intro Screen -->
-        <section id="intro-screen" class="card hidden">
-            <h1 data-i18n="appTitle">Relationship Quality Matcher</h1>
-            <p data-i18n="introDesc1">This assessment is based on the machine learning study of over 11,000 couples by <em>Joel et al. (2020)</em>.</p>
-            <p data-i18n="introDesc2">Discover the strength of your relationship based on the most robust scientific predictors.</p>
-            <button id="start-btn" class="primary-btn" data-i18n="startBtn">Start Assessment</button>
-        </section>
+        <div class="screen hidden" id="intro-screen">
+            <h2 data-i18n="appTitle" class="glow-text">Relationship Matcher ✨</h2>
+            <div class="intro-card">
+                <p data-i18n="introDesc1">Hey there! 👋 This fun little quiz is actually based on a massive machine learning study of over 11,000 couples by <em>Joel et al. (2020)</em>.</p>
+                <p data-i18n="introDesc2">Ready to discover the real strength of your relationship using some hard science? Let's dive in!</p>
+            </div>
+            <button class="btn pulse" id="start-btn" data-i18n="startBtn">Let's go! 🚀</button>
+        </div>
 
         <!-- Quiz Screen -->
-        <section id="quiz-screen" class="card hidden">
+        <div class="screen hidden" id="quiz-screen">
             <div class="progress-bar-container">
-                <div id="progress-bar" class="progress-bar"></div>
-            </div>
-            <h2 id="question-text" class="question-text">Question text goes here...</h2>
-            
-            <div class="options-container" id="options-container">
-                <!-- Radio buttons generated by JS -->
+                <div class="progress-bar" id="progress-bar"></div>
             </div>
             
-            <div class="navigation-buttons">
-                <button id="prev-btn" class="secondary-btn" disabled>Previous</button>
-                <button id="next-btn" class="primary-btn">Next</button>
+            <div class="question-container">
+                <h3 id="question-text">Question goes here?</h3>
+                <div class="options-container" id="options-container">
+                    <!-- Options injected via JS -->
+                </div>
             </div>
-        </section>
+
+            <div class="nav-buttons">
+                <button class="btn btn-outline" id="prev-btn" data-i18n="prevBtn">Back</button>
+                <button class="btn" id="next-btn" data-i18n="nextBtn">Next</button>
+            </div>
+        </div>
 
         <!-- Result Screen -->
-        <section id="result-screen" class="card hidden">
-            <h2 data-i18n="profileTitle">Your Relationship Profile</h2>
+        <div class="screen hidden" id="result-screen">
+            <h2 data-i18n="profileTitle">Here's how things look! 💖</h2>
             
-            <div class="score-container">
+            <div class="score-card">
                 <div class="score-circle">
-                    <span id="final-score">0</span><span>%</span>
+                    <span class="score-text"><span id="final-score">0</span>%</span>
+                </div>
+                <div class="score-details">
+                    <h3 id="result-title">Result Title</h3>
+                    <p id="result-description" class="result-desc">Result description goes here...</p>
                 </div>
             </div>
             
-            <h3 id="result-title">Result Title</h3>
-            <p id="result-description" class="result-desc">Result description goes here...</p>
+            <!-- Couples Dyadic Advice Section (Hidden by default) -->
+            <div class="couples-advice-box hidden" id="couples-advice-box">
+                <h4 data-i18n="dyadicTitle">Couples Growth Areas 🌱</h4>
+                <div class="dyadic-item" id="dyadic-item-1">
+                    <strong id="adv-name1">Partner 1:</strong>
+                    <p id="adv-text1">Advice 1</p>
+                </div>
+                <div class="dyadic-item" id="dyadic-item-2">
+                    <strong id="adv-name2">Partner 2:</strong>
+                    <p id="adv-text2">Advice 2</p>
+                </div>
+
+                <button class="btn btn-outline" id="view-my-breakdown-btn" style="margin-top: 1.5rem; padding: 0.8rem; font-size: 1rem;" data-i18n="viewMyBreakdown">View my detailed breakdown 📊</button>
+            </div>
 
             <div class="breakdown-container" id="breakdown-container">
-                <h4 data-i18n="breakdownTitle">Top 10 Scientific Predictors</h4>
-                
-                <div class="breakdown-item">
-                    <div class="breakdown-header">
-                        <span class="bd-title" data-i18n="predCommitment">Perceived Partner Commitment</span>
-                        <span class="bd-val" id="val-pred1">0%</span>
-                    </div>
-                    <div class="bd-bar-bg"><div class="bd-bar fill-dynamics" id="bar-pred1"></div></div>
-                </div>
-
-                <div class="breakdown-item">
-                    <div class="breakdown-header">
-                        <span class="bd-title" data-i18n="predAppreciation">Appreciation</span>
-                        <span class="bd-val" id="val-pred2">0%</span>
-                    </div>
-                    <div class="bd-bar-bg"><div class="bd-bar fill-connection" id="bar-pred2"></div></div>
-                </div>
-
-                <div class="breakdown-item">
-                    <div class="breakdown-header">
-                        <span class="bd-title" data-i18n="predSex">Sexual Satisfaction</span>
-                        <span class="bd-val" id="val-pred3">0%</span>
-                    </div>
-                    <div class="bd-bar-bg"><div class="bd-bar fill-health" id="bar-pred3"></div></div>
-                </div>
-
-                <div class="breakdown-item">
-                    <div class="breakdown-header">
-                        <span class="bd-title" data-i18n="predPartnerSat">Perceived Partner Satisfaction</span>
-                        <span class="bd-val" id="val-pred4">0%</span>
-                    </div>
-                    <div class="bd-bar-bg"><div class="bd-bar fill-dynamics" id="bar-pred4"></div></div>
-                </div>
-
-                <div class="breakdown-item">
-                    <div class="breakdown-header">
-                        <span class="bd-title" data-i18n="predConflict">Absence of Conflict</span>
-                        <span class="bd-val" id="val-pred5">0%</span>
-                    </div>
-                    <div class="bd-bar-bg"><div class="bd-bar fill-health" id="bar-pred5"></div></div>
-                </div>
-
-                <div class="breakdown-item">
-                    <div class="breakdown-header">
-                        <span class="bd-title" data-i18n="predResponsiveness">Perceived Partner Responsiveness</span>
-                        <span class="bd-val" id="val-pred6">0%</span>
-                    </div>
-                    <div class="bd-bar-bg"><div class="bd-bar fill-connection" id="bar-pred6"></div></div>
-                </div>
-
-                <div class="breakdown-item">
-                    <div class="breakdown-header">
-                        <span class="bd-title" data-i18n="predInvestment">Investment in Relationship</span>
-                        <span class="bd-val" id="val-pred7">0%</span>
-                    </div>
-                    <div class="bd-bar-bg"><div class="bd-bar fill-dynamics" id="bar-pred7"></div></div>
-                </div>
-
-                <div class="breakdown-item">
-                    <div class="breakdown-header">
-                        <span class="bd-title" data-i18n="predSupport">General Support</span>
-                        <span class="bd-val" id="val-pred8">0%</span>
-                    </div>
-                    <div class="bd-bar-bg"><div class="bd-bar fill-health" id="bar-pred8"></div></div>
-                </div>
-
-                <div class="breakdown-item">
-                    <div class="breakdown-header">
-                        <span class="bd-title" data-i18n="predCapitalization">Celebrating Successes</span>
-                        <span class="bd-val" id="val-pred9">0%</span>
-                    </div>
-                    <div class="bd-bar-bg"><div class="bd-bar fill-connection" id="bar-pred9"></div></div>
-                </div>
-
-                <div class="breakdown-item">
-                    <div class="breakdown-header">
-                        <span class="bd-title" data-i18n="predAttachment">Comfort & Security</span>
-                        <span class="bd-val" id="val-pred10">0%</span>
-                    </div>
-                    <div class="bd-bar-bg"><div class="bd-bar fill-dynamics" id="bar-pred10"></div></div>
-                </div>
+                <h4 data-i18n="breakdownTitle" id="bd-header">Top 10 Scientific Predictors</h4>
+                <!-- Breakdown items injected via JS -->
             </div>
 
             <div class="insights-box">
-                <h4 data-i18n="insightTitle">Science Insight 🧬</h4>
-                <p data-i18n="insightDesc">Based exactly on Joel et al. (2020): 1) Your individual traits (like depression or anxiety) add <strong>no predictive power</strong> to this score beyond your relationship-specific answers. 2) No self-reported variables can reliably predict whether your relationship will get better or worse in the future!</p>
+                <h4 data-i18n="insightTitle">A quick science note 🧬</h4>
+                <p data-i18n="insightDesc">According to the study: 1) Your individual traits (like anxiety) actually don't add much to this score beyond how you feel about your relationship. 2) No quiz can predict the future, so these results just show where you are right now!</p>
             </div>
-            
-            <button id="restart-btn" class="secondary-btn" data-i18n="retakeBtn">Retake Assessment</button>
-        </section>
-    </main>
 
+            <div class="action-buttons" id="result-actions">
+                <a href="#" class="btn btn-whatsapp hidden" id="wa-share-btn">Share to Partner via WhatsApp 💬</a>
+                <button class="btn btn-outline" id="restart-btn" data-i18n="retakeBtn">Take it again! 🔄</button>
+            </div>
+        </div>
+        
+    </div>
     <script src="app.js"></script>
 </body>
 </html>
