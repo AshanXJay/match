@@ -116,13 +116,14 @@ const translations = {
             yourNameLabel: "Your Name",
             partnerNameLabel: "Partner's Name",
             privacyGuaranteeHeader: "🔒 Ironclad Privacy",
-            privacyDetails: `<ul style="font-size: 0.85rem; padding-left: 20px; line-height: 1.5; text-align: left; opacity: 0.9;">
-                <li style="margin-bottom: 8px;"><strong>End-to-End Encrypted:</strong> Your names and answers are encrypted locally on your device (AES-GCM). The server cannot read them.</li>
-                <li style="margin-bottom: 8px;"><strong>Self-Destructing Links:</strong> Generated links automatically expire 1 hour after creation.</li>
-                <li style="margin-bottom: 8px;"><strong>Device Locking:</strong> Once a link is opened, it binds to that browser. If a 3rd party tries to open the same link, they will be blocked.</li>
-                <li><strong>No Database or Backend Servers:</strong> We have absolutely zero backend servers to store or process your personal data. The global dashboard only securely tracks anonymous scores.</li>
-            </ul>`,
-            
+            priv1Title: "End-to-End Encrypted:",
+            priv1Desc: "Your names and answers are encrypted locally on your device (AES-GCM). The server cannot read them.",
+            priv2Title: "Self-Destructing Links:",
+            priv2Desc: "Generated links automatically expire 1 hour after creation.",
+            priv3Title: "Device Locking:",
+            priv3Desc: "Once a link is opened, it binds to that browser. If a 3rd party tries to open the same link, they will be blocked.",
+            priv4Title: "No Database or Backend Servers:",
+            priv4Desc: "We have absolutely zero backend servers to store or process your personal data. The global dashboard only securely tracks anonymous scores.",
             breakdownTitle: "Top 10 Scientific Predictors",
             dyadicTitle: "Couples Growth Areas 🌱",
             predCommitment: "Commitment",
@@ -136,22 +137,12 @@ const translations = {
             predCapitalization: "Celebrating Successes",
             predAttachment: "Comfort & Security",
             insightTitle: "A quick science note 🧬",
-            viewMyBreakdown: "View my detailed breakdown 📊",
             insightDesc: "According to the study: 1) Your individual traits (like anxiety) actually don't add much to this score beyond how you feel about your relationship. 2) No quiz can predict the future, so these results just show where you are right now!",
-            viewMyBreakdown: "මගේ විස්තරාත්මක ප්‍රතිඵල බලන්න 📊",
             viewMyBreakdown: "View my detailed breakdown 📊",
             retakeBtn: "Take it again! 🔄",
-            viewMyBreakdown: "View my detailed breakdown 📊",
-            viewMyBreakdown: "මගේ විස්තරාත්මක ප්‍රතිඵල බලන්න 📊",
             modalTitle: "Unlock Couples Mode! 💖",
             modalShareBtn: "Share to {partner} via WhatsApp 💬",
             modalCloseBtn: "Just show my results",
-            modalTitle: "Couples Mode විවෘත කරන්න! 💖",
-            modalShareBtn: "{partner} වෙත WhatsApp හරහා යවන්න 💬",
-            modalCloseBtn: "මගේ ප්‍රතිඵල පමණක් පෙන්වන්න",
-            modalTitle: "Couples Mode-ஐ திறக்கவும்! 💖",
-            modalShareBtn: "{partner} -க்கு WhatsApp மூலம் பகிரவும் 💬",
-            modalCloseBtn: "எனது முடிவுகளை மட்டும் காட்டு",
             waShareP1: "Share to {partner} via WhatsApp 💬",
             waShareP2: "Send Final Results back to {partner} 💬",
             waMsgP1: "Hey {nB}! 💕 {nA} just took a deep dive into your relationship and challenged you to do the same! Ready to see your combined Couples Score? Click here: {link}",
@@ -236,14 +227,16 @@ const translations = {
             nameTitle: "ඔබව හඳුනාගනිමු!",
             nameDesc: "ඔබට හොඳම අත්දැකීම ලබා දීමට, ඔබේ නම් මොනවාද?",
             yourNameLabel: "ඔබේ නම",
-            privacyGuaranteeHeader: "🔒 දැඩි රහස්‍යතාව",
-            privacyDetails: `<ul style="font-size: 0.85rem; padding-left: 20px; line-height: 1.5; text-align: left; opacity: 0.9; margin:0;">
-                <li style="margin-bottom: 8px;"><strong>End-to-End Encrypted:</strong> ඔබගේ නම් සහ පිළිතුරු ඔබගේ උපාංගය තුළම සංකේතනය වේ (AES-GCM).</li>
-                <li style="margin-bottom: 8px;"><strong>ස්වයංක්‍රීයව මැකීයාම:</strong> සබැඳි (Links) පැය 1කට පසු ස්වයංක්‍රීයව කල් ඉකුත් වේ.</li>
-                <li style="margin-bottom: 8px;"><strong>උපාංගය අගුලු දැමීම:</strong> සබැඳිය විවෘත කළ පසු එය එම බ්‍රවුසරයට අගුලු වැටේ. වෙනත් අයෙකුට එය විවෘත කළ නොහැක.</li>
-                <li><strong>දත්ත ගබඩා හෝ පසුපෙළ (Backend) සේවාදායක නැත:</strong> ඔබගේ පෞද්ගලික දත්ත ගබඩා කිරීමට හෝ සැකසීමට අපට කිසිදු backend සේවාදායකයක් (servers) නොමැත. අපගේ ගෝලීය දත්ත පුවරුව නිර්නාමික ලකුණු පමණක් ආරක්ෂිතව නිරීක්ෂණය කරයි.</li>
-            </ul>`,
             partnerNameLabel: "සහකරුගේ/සහකාරියගේ නම",
+            privacyGuaranteeHeader: "🔒 දැඩි රහස්‍යතාව",
+            priv1Title: "End-to-End Encrypted:",
+            priv1Desc: "ඔබගේ නම් සහ පිළිතුරු ඔබගේ උපාංගය තුළම සංකේතනය වේ (AES-GCM).",
+            priv2Title: "ස්වයංක්‍රීයව මැකීයාම:",
+            priv2Desc: "සබැඳි (Links) පැය 1කට පසු ස්වයංක්‍රීයව කල් ඉකුත් වේ.",
+            priv3Title: "උපාංගය අගුලු දැමීම:",
+            priv3Desc: "සබැඳිය විවෘත කළ පසු එය එම බ්‍රවුසරයට අගුලු වැටේ. වෙනත් අයෙකුට එය විවෘත කළ නොහැක.",
+            priv4Title: "දත්ත ගබඩා හෝ පසුපෙළ (Backend) සේවාදායක නැත:",
+            priv4Desc: "ඔබගේ පෞද්ගලික දත්ත ගබඩා කිරීමට හෝ සැකසීමට අපට කිසිදු backend සේවාදායකයක් (servers) නොමැත. අපගේ ගෝලීය දත්ත පුවරුව නිර්නාමික ලකුණු පමණක් ආරක්ෂිතව නිරීක්ෂණය කරයි.",
             privacyGuarantee: "🔒 100% පුද්ගලිකයි: සංකේතනය කර ඇත. සබැඳි පැය 1කට පසු විනාශ වන අතර ඔබේ උපාංගයට පමණක් සීමා වේ.",
             breakdownTitle: "ප්‍රධාන විද්‍යාත්මක සාධක 10",
             dyadicTitle: "වර්ධනය විය යුතු අංශ 🌱",
@@ -258,13 +251,12 @@ const translations = {
             predCapitalization: "ජයග්‍රහණ සැමරීම",
             predAttachment: "සුවපහසුව සහ ආරක්ෂාව",
             insightTitle: "කුඩා විද්‍යාත්මක සටහනක් 🧬",
-            viewMyBreakdown: "මගේ විස්තරාත්මක ප්‍රතිඵල බලන්න 📊",
             insightDesc: "අධ්‍යයනයට අනුව: 1) ඔබේ පෞද්ගලික ලක්ෂණ වලට වඩා ඔබේ සම්බන්ධතාවය ගැන ඔබට හැඟෙන ආකාරය මෙහිදී ගොඩක් වැදගත් වෙනවා. 2) අනාගතය කොහොම වෙයිද කියලා කිසිම ඇගයීමකට කියන්න බෑ, ඒ නිසා මේ ප්‍රතිඵල වලින් පෙන්වන්නේ ඔබේ වත්මන් තත්වය විතරයි!",
+            viewMyBreakdown: "මගේ විස්තරාත්මක ප්‍රතිඵල බලන්න 📊",
             retakeBtn: "නැවත කරමු! 🔄",
-            viewMyBreakdown: "View my detailed breakdown 📊",
-            modalTitle: "Unlock Couples Mode! 💖",
-            modalShareBtn: "Share to {partner} via WhatsApp 💬",
-            modalCloseBtn: "Just show my results",
+            modalTitle: "Couples Mode විවෘත කරන්න! 💖",
+            modalShareBtn: "{partner} වෙත WhatsApp හරහා යවන්න 💬",
+            modalCloseBtn: "මගේ ප්‍රතිඵල පමණක් පෙන්වන්න",
             waShareP1: "{partner} වෙත WhatsApp හරහා යවන්න 💬",
             waShareP2: "අවසාන ප්‍රතිඵල {partner} වෙත යවන්න 💬",
             waMsgP1: "හලෝ {nB}! මම අපේ සම්බන්ධතාවය ගැන පරීක්ෂණයක් කළා. ඔයාගේ කොටසත් මෙතනින් කරන්න, එතකොට අපිට අපේ Couples Score එකයි, අපි හදාගන්න ඕන දේවලුයි බලාගන්න පුළුවන්! {link}",
@@ -351,13 +343,14 @@ const translations = {
             yourNameLabel: "உங்கள் பெயர்",
             partnerNameLabel: "துணைவரின் பெயர்",
             privacyGuaranteeHeader: "🔒 உறுதியான தனியுரிமை",
-            privacyDetails: `<ul style="font-size: 0.85rem; padding-left: 20px; line-height: 1.5; text-align: left; opacity: 0.9;">
-                <li style="margin-bottom: 8px;"><strong>முழுமையாக குறியாக்கம் செய்யப்பட்டது:</strong> உங்கள் பெயர்கள் மற்றும் பதில்கள் உங்கள் சாதனத்திலேயே குறியாக்கம் செய்யப்படுகின்றன (AES-GCM).</li>
-                <li style="margin-bottom: 8px;"><strong>தானாக அழியும் இணைப்புகள்:</strong> இணைப்புகள் 1 மணிநேரத்திற்குப் பிறகு காலாவதியாகும்.</li>
-                <li style="margin-bottom: 8px;"><strong>சாதனப் பூட்டு:</strong> இணைப்பைத் திறந்தவுடன் அது அந்த உலாவியுடன் பிணைக்கப்படும். வேறு யாரும் திறக்க முடியாது.</li>
-                <li><strong>தரவுத்தளம் அல்லது பின்தள (Backend) சேவையகங்கள் இல்லை:</strong> உங்கள் தனிப்பட்ட தரவை சேமிக்கவோ அல்லது கையாளவோ எங்களிடம் எந்த பின்தள சேவையகங்களும் (servers) இல்லை. உலகளாவிய டாஷ்போர்டு அநாமதேய மதிப்பெண்களை மட்டுமே பாதுகாப்பாகக் கண்காணிக்கிறது.</li>
-            </ul>`,
-            
+            priv1Title: "முழுமையாக குறியாக்கம் செய்யப்பட்டது:",
+            priv1Desc: "உங்கள் பெயர்கள் மற்றும் பதில்கள் உங்கள் சாதனத்திலேயே குறியாக்கம் செய்யப்படுகின்றன (AES-GCM).",
+            priv2Title: "தானாக அழியும் இணைப்புகள்:",
+            priv2Desc: "இணைப்புகள் 1 மணிநேரத்திற்குப் பிறகு காலாவதியாகும்.",
+            priv3Title: "சாதனப் பூட்டு:",
+            priv3Desc: "இணைப்பைத் திறந்தவுடன் அது அந்த உலாவியுடன் பிணைக்கப்படும். வேறு யாரும் திறக்க முடியாது.",
+            priv4Title: "தரவுத்தளம் அல்லது பின்தள (Backend) சேவையகங்கள் இல்லை:",
+            priv4Desc: "உங்கள் தனிப்பட்ட தரவை சேமிக்கவோ அல்லது கையாளவோ எங்களிடம் எந்த பின்தள சேவையகங்களும் (servers) இல்லை. உலகளாவிய டாஷ்போர்டு அநாமதேய மதிப்பெண்களை மட்டுமே பாதுகாப்பாகக் கண்காணிக்கிறது.",
             breakdownTitle: "முக்கிய 10 அறிவியல் காரணிகள்",
             dyadicTitle: "மேம்படுத்த வேண்டியவை 🌱",
             predCommitment: "அர்ப்பணிப்பு",
@@ -371,13 +364,12 @@ const translations = {
             predCapitalization: "வெற்றிகளைக் கொண்டாடுதல்",
             predAttachment: "ஆறுதல் மற்றும் பாதுகாப்பு",
             insightTitle: "ஒரு சிறிய அறிவியல் குறிப்பு 🧬",
-            viewMyBreakdown: "எனது விரிவான முடிவுகளைக் காண்க 📊",
             insightDesc: "ஆய்வின்படி: 1) உங்கள் தனிப்பட்ட குணாதிசயங்களை விட உங்கள் உறவைப் பற்றி நீங்கள் எப்படி உணர்கிறீர்கள் என்பதே இங்கு மிகவும் முக்கியமானது. 2) எதிர்காலம் எப்படி இருக்கும் என்று எந்தவொரு மதிப்பீட்டாலும் சொல்ல முடியாது!",
+            viewMyBreakdown: "எனது விரிவான முடிவுகளைக் காண்க 📊",
             retakeBtn: "மீண்டும் செய்யலாம்! 🔄",
-            viewMyBreakdown: "View my detailed breakdown 📊",
-            modalTitle: "Unlock Couples Mode! 💖",
-            modalShareBtn: "Share to {partner} via WhatsApp 💬",
-            modalCloseBtn: "Just show my results",
+            modalTitle: "Couples Mode-ஐ திறக்கவும்! 💖",
+            modalShareBtn: "{partner} -க்கு WhatsApp மூலம் பகிரவும் 💬",
+            modalCloseBtn: "எனது முடிவுகளை மட்டும் காட்டு",
             waShareP1: "{partner} -க்கு WhatsApp மூலம் பகிரவும் 💬",
             waShareP2: "இறுதி முடிவுகளை {partner} -க்கு அனுப்பவும் 💬",
             waMsgP1: "ஹாய் {nB}! நான் நமது உறவு குறித்து ஒரு மதிப்பீட்டை செய்தேன். உங்கள் பகுதியை இங்கே தொடங்குங்கள், அதன் மூலம் நமது Couples Score மற்றும் நாம் எதில் கவனம் செலுத்த வேண்டும் என்பதை அறியலாம்! {link}",
@@ -450,16 +442,13 @@ const translations = {
         ]
     }
 };
-
 const colorPalettes = {
     high: { primary: '#10b981', secondary: '#14b8a6', bg: '#022c22' },
     mod: { primary: '#3b82f6', secondary: '#8b5cf6', bg: '#0f172a' },
     grow: { primary: '#f59e0b', secondary: '#f97316', bg: '#451a03' },
     needs: { primary: '#ef4444', secondary: '#e11d48', bg: '#4c0519' }
 };
-
 let questions = [];
-
 // App State
 let appMode = 'p1'; // 'p1', 'p2', 'final'
 let p1Data = null; // { nA, nB, answers }
@@ -468,7 +457,6 @@ let myName = '';
 let theirName = '';
 let currentQuestionIndex = 0;
 let answers = [];
-
 // DOM Elements
 const langScreen = document.getElementById('lang-screen');
 const nameScreen = document.getElementById('name-screen');
@@ -484,26 +472,20 @@ const questionText = document.getElementById('question-text');
 const optionsContainer = document.getElementById('options-container');
 const progressBar = document.getElementById('progress-bar');
 const waShareBtn = document.getElementById('wa-share-btn');
-
-
 document.getElementById('view-my-breakdown-btn').addEventListener('click', function() {
     this.classList.add('hidden');
     document.getElementById('breakdown-container').classList.remove('hidden');
 });
-
-
 document.getElementById('modal-close-btn').addEventListener('click', () => {
     const modal = document.getElementById('couples-modal');
     modal.classList.remove('active');
     setTimeout(() => modal.classList.add('hidden'), 400);
 });
-
 document.getElementById('modal-wa-btn').addEventListener('click', () => {
     const modal = document.getElementById('couples-modal');
     modal.classList.remove('active');
     setTimeout(() => modal.classList.add('hidden'), 400);
 });
-
 // --- E2E Encryption (Web Crypto API) ---
 async function generateKey() {
     return await window.crypto.subtle.generateKey({ name: "AES-GCM", length: 256 }, true, ["encrypt", "decrypt"]);
@@ -540,21 +522,17 @@ async function decryptData(encryptedString, key) {
     return JSON.parse(new TextDecoder().decode(decrypted));
 }
 // ---------------------------------------
-
 window.onload = async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const hashParams = new URLSearchParams(window.location.hash.substring(1));
     const keyString = hashParams.get('key');
-    
     let sessionData = null;
     let matchRole = localStorage.getItem('match_role');
     let savedState = localStorage.getItem('match_state');
-    
     if (urlParams.has('q') && keyString) {
         try {
             const key = await importKey(keyString);
             const decrypted = await decryptData(urlParams.get('q'), key);
-            
             // Validate Expiration (1 hour)
             if (decrypted.timestamp) {
                 const ONE_HOUR = 60 * 60 * 1000;
@@ -567,7 +545,6 @@ window.onload = async () => {
                     return;
                 }
             }
-            
             // Validate Device Isolation
             if (decrypted.mode === 'p1') {
                 if (matchRole === 'A') {
@@ -577,7 +554,6 @@ window.onload = async () => {
                 }
                 matchRole = 'B';
                 localStorage.setItem('match_role', 'B');
-                
             } else if (decrypted.mode === 'final') {
                 if (matchRole === 'B') {
                     alert("This link is meant for Partner A! You've already completed your part.");
@@ -587,12 +563,10 @@ window.onload = async () => {
                 matchRole = 'A';
                 localStorage.setItem('match_role', 'A');
             }
-            
             // Save state for refresh resilience and clean URL
             localStorage.setItem('match_state', JSON.stringify(decrypted));
             window.history.replaceState({}, document.title, window.location.pathname);
             sessionData = decrypted;
-            
         } catch(e) {
             console.error("Decryption failed", e);
             alert("Invalid or broken link.");
@@ -604,7 +578,6 @@ window.onload = async () => {
         // Initial setup for A
         localStorage.setItem('match_role', 'A');
     }
-    
     if (sessionData) {
         if (sessionData.mode === 'p1') {
             appMode = 'p2';
@@ -612,21 +585,16 @@ window.onload = async () => {
             myName = p1Data.nB;
             theirName = p1Data.nA;
             currentLang = p1Data.lang || 'en';
-            
             setLanguage(currentLang);
             langScreen.classList.remove('active');
             langScreen.classList.add('hidden');
-            
             let greeting = translations[currentLang].ui.greetingP2.replace('{nA}', theirName).replace('{nB}', myName);
                         let privacyAssurance = currentLang === 'en' ? `🔒 Rest assured, ${theirName} cannot see your individual answers, and you won't see theirs either!` :
                                    currentLang === 'si' ? `🔒 බිය නොවන්න, ${theirName} හට ඔබගේ තනි පිළිතුරු දැකිය නොහැකි අතර, ඔබටද ඔවුන්ගේ පිළිතුරු දැකිය නොහැක!` :
                                    `🔒 கவலைப்பட வேண்டாம், ${theirName} உங்கள் தனிப்பட்ட பதில்களைக் காண முடியாது, நீங்களும் அவர்களின் பதில்களைக் காண முடியாது!`;
-            
             document.querySelector('#intro-screen .intro-card').innerHTML = `<p>${greeting}</p><p>${translations[currentLang].ui.introDesc2}</p><p style="font-size: 0.85rem; color: var(--primary); margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;">${privacyAssurance}</p>`;
-            
             introScreen.classList.remove('hidden');
             introScreen.classList.add('active');
-            
         } else if (sessionData.mode === 'final') {
             appMode = 'final';
             p1Data = sessionData.p1;
@@ -634,7 +602,6 @@ window.onload = async () => {
             myName = p1Data.nA;
             theirName = p1Data.nB;
             currentLang = sessionData.lang || 'en';
-            
             setLanguage(currentLang);
             langScreen.classList.remove('active');
             langScreen.classList.add('hidden');
@@ -642,12 +609,10 @@ window.onload = async () => {
         }
     }
 };
-
 function setLanguage(lang) {
     currentLang = lang;
     questions = translations[lang].questions;
     if(answers.length === 0) answers = new Array(questions.length).fill(null);
-    
     // Update static i18n
     const elements = document.querySelectorAll('[data-i18n]');
     elements.forEach(el => {
@@ -656,7 +621,6 @@ function setLanguage(lang) {
             el.innerHTML = translations[lang].ui[key];
         }
     });
-    
     if (appMode === 'p1') {
         langScreen.classList.remove('active');
         setTimeout(() => {
@@ -667,11 +631,9 @@ function setLanguage(lang) {
         }, 400);
     }
 }
-
 namesNextBtn.addEventListener('click', () => {
     myName = document.getElementById('your-name').value.trim() || 'Partner A';
     theirName = document.getElementById('partner-name').value.trim() || 'Partner B';
-    
     nameScreen.classList.remove('active');
     setTimeout(() => {
         nameScreen.classList.add('hidden');
@@ -680,7 +642,6 @@ namesNextBtn.addEventListener('click', () => {
         introScreen.classList.add('active');
     }, 400);
 });
-
 startBtn.addEventListener('click', () => {
     introScreen.classList.remove('active');
     setTimeout(() => {
@@ -691,26 +652,21 @@ startBtn.addEventListener('click', () => {
         renderQuestion();
     }, 400);
 });
-
 nextBtn.addEventListener('click', nextQuestion);
 prevBtn.addEventListener('click', prevQuestion);
 restartBtn.addEventListener('click', restartQuiz);
-
 function renderQuestion() {
     const q = questions[currentQuestionIndex];
     let qText = q.text.replace('{partner}', `<strong>${theirName}</strong>`);
     questionText.innerHTML = `${currentQuestionIndex + 1}. ${qText}`;
-    
     const progress = (currentQuestionIndex / questions.length) * 100;
     progressBar.style.width = `${progress}%`;
-    
     const options = translations[currentLang].optionSets[q.optionSet];
     optionsContainer.innerHTML = '';
     options.forEach(opt => {
         const isSelected = answers[currentQuestionIndex] === opt.value;
         const label = document.createElement('label');
         label.className = `option-label ${isSelected ? 'selected' : ''}`;
-        
         const input = document.createElement('input');
         input.type = 'radio';
         input.name = 'question_option';
@@ -722,17 +678,14 @@ function renderQuestion() {
             if (currentQuestionIndex < questions.length - 1) setTimeout(nextQuestion, 400);
             else nextBtn.disabled = false;
         });
-        
         label.appendChild(input);
         label.appendChild(document.createTextNode(opt.label));
         optionsContainer.appendChild(label);
     });
-    
     prevBtn.disabled = currentQuestionIndex === 0;
     nextBtn.innerHTML = currentQuestionIndex === questions.length - 1 ? translations[currentLang].ui.resultsBtn : translations[currentLang].ui.nextBtn;
     nextBtn.disabled = answers[currentQuestionIndex] === null;
 }
-
 function nextQuestion() {
     if (answers[currentQuestionIndex] === null) return;
     if (currentQuestionIndex < questions.length - 1) {
@@ -756,7 +709,6 @@ function prevQuestion() {
         }, 300);
     }
 }
-
 function calculateScore(ansArray) {
     let totalScore = 0; let totalMax = 0;
     questions.forEach((q, index) => {
@@ -767,17 +719,14 @@ function calculateScore(ansArray) {
     });
     return Math.round((totalScore / totalMax) * 100);
 }
-
 function applyTheme(palette) {
     document.documentElement.style.setProperty('--primary', palette.primary);
     document.documentElement.style.setProperty('--primary-hover', palette.primary);
     document.documentElement.style.setProperty('--secondary', palette.secondary);
     document.documentElement.style.setProperty('--bg-color', palette.bg);
 }
-
 async function showResults() {
     let finalScore = 0;
-    
     if (appMode === 'p1') {
         finalScore = calculateScore(answers);
     } else if (appMode === 'p2') {
@@ -786,32 +735,24 @@ async function showResults() {
     } else if (appMode === 'final') {
         finalScore = Math.round((calculateScore(p1Data.answers) + calculateScore(p2Data.answers)) / 2);
     }
-
     let tierKey = '';
     if (finalScore >= 80) { applyTheme(colorPalettes.high); tierKey = 'high'; }
     else if (finalScore >= 60) { applyTheme(colorPalettes.mod); tierKey = 'mod'; }
     else if (finalScore >= 40) { applyTheme(colorPalettes.grow); tierKey = 'grow'; }
     else { applyTheme(colorPalettes.needs); tierKey = 'needs'; }
-    
     if(appMode !== 'final') {
         quizScreen.classList.remove('active');
         quizScreen.classList.add('hidden');
     }
-    
     resultScreen.classList.remove('hidden');
     void resultScreen.offsetWidth;
     resultScreen.classList.add('active');
-    
     animateScore(finalScore);
-    
     const titleEl = document.getElementById('result-title');
     const descEl = document.getElementById('result-description');
     const trans = translations[currentLang];
-    
     titleEl.textContent = trans.resultTiers[tierKey + 'Title'];
     descEl.innerHTML = trans.dynamicText.overallText.replace('{score}', finalScore) + trans.resultTiers[tierKey + 'Desc'] + trans.dynamicText['advice_' + tierKey];
-    
-
     // Setup WhatsApp Button
     if (appMode === 'p1') {
         let preds = [];
@@ -829,18 +770,15 @@ async function showResults() {
         const link = `${window.location.origin}${window.location.pathname}?q=${encrypted}#key=${keyStr}`;
         const msg = trans.ui.waMsgP1.replace('{nA}', myName).replace('{nB}', theirName).replace('{link}', link);
         waShareBtn.href = `https://wa.me/?text=${encodeURIComponent(msg)}`;
-        
         // Setup Modal popup for Couples Mode
         const modalWaBtn = document.getElementById('modal-wa-btn');
         modalWaBtn.textContent = trans.ui.modalShareBtn.replace('{partner}', theirName);
         modalWaBtn.href = waShareBtn.href;
         document.getElementById('modal-close-btn').style.display = 'inline-block';
-        
         let descStr = currentLang === 'en' ? `Send this to <strong>${theirName}</strong> to discover your combined score and see what areas you both can grow in!<br><br><span style="font-size:0.85rem; color:var(--primary);">🔒 Don't worry, ${theirName} will NOT see your individual answers or stats!</span>` : 
                       currentLang === 'si' ? `ඔබ දෙදෙනාගේම ප්‍රතිඵල දැනගැනීමට මෙය <strong>${theirName}</strong> වෙත යවන්න!<br><br><span style="font-size:0.85rem; color:var(--primary);">🔒 බිය නොවන්න, ${theirName} හට ඔබගේ තනි පිළිතුරු හෝ ප්‍රතිඵල දැකිය නොහැක!</span>` : 
                       `உங்கள் இருவரின் முடிவுகளையும் காண இதை <strong>${theirName}</strong> -க்கு அனுப்பவும்!<br><br><span style="font-size:0.85rem; color:var(--primary);">🔒 கவலைப்பட வேண்டாம், ${theirName} உங்கள் தனிப்பட்ட பதில்களைக் காண முடியாது!</span>`;
         document.getElementById('modal-desc').innerHTML = descStr;
-        
         setTimeout(() => {
             const modal = document.getElementById('couples-modal');
             modal.classList.remove('hidden');
@@ -856,7 +794,6 @@ async function showResults() {
             preds.push((v1 + v2) / 2);
         }
         pingStatsApi({ type: 'couple', score: finalScore, preds: preds, cat: tierKey }, 'p2');
-        
         waShareBtn.classList.remove('hidden');
         waShareBtn.textContent = trans.ui.waShareP2.replace('{partner}', theirName);
         const data = { mode: 'final', p1: p1Data, p2: p2Data, lang: currentLang, timestamp: Date.now() };
@@ -866,39 +803,32 @@ async function showResults() {
         const link = `${window.location.origin}${window.location.pathname}?q=${encrypted}#key=${keyStr}`;
         const msg = trans.ui.waMsgP2.replace('{nA}', theirName).replace('{nB}', myName).replace('{link}', link);
         waShareBtn.href = `https://wa.me/?text=${encodeURIComponent(msg)}`;
-        
         // Unclosable popup for P2
         const modalWaBtn = document.getElementById('modal-wa-btn');
         modalWaBtn.textContent = trans.ui.waShareP2.replace('{partner}', theirName);
         modalWaBtn.href = waShareBtn.href;
-        
         // Hide close button
         document.getElementById('modal-close-btn').style.display = 'none';
-        
         let titleStr = currentLang === 'en' ? `Send to ${theirName} to Unlock!` : 
                        currentLang === 'si' ? `ප්‍රතිඵල බැලීමට ${theirName} වෙත යවන්න!` : 
                        `${theirName} -க்கு அனுப்பி முடிவுகளைப் பார்க்கவும்!`;
         document.querySelector('#couples-modal h2').innerHTML = titleStr;
-                       
         let descStr = currentLang === 'en' ? `You've finished! To reveal your relationship breakdown and advice, you MUST send the Final Results back to <strong>${theirName}</strong>.` : 
                       currentLang === 'si' ? `ඔබේ ඇගයීම අවසන්! ඔබේ ප්‍රතිඵල සහ උපදෙස් බැලීමට, අවසාන ප්‍රතිඵල <strong>${theirName}</strong> වෙත යැවිය යුතුමයි.` : 
                       `நீங்கள் முடித்துவிட்டீர்கள்! உங்கள் முடிவுகள் மற்றும் ஆலோசனைகளைப் பார்க்க, இறுதி முடிவுகளை <strong>${theirName}</strong> -க்கு அனுப்ப வேண்டும்.`;
         document.getElementById('modal-desc').innerHTML = descStr;
-        
         setTimeout(() => {
             const modal = document.getElementById('couples-modal');
             modal.classList.remove('hidden');
             void modal.offsetWidth;
             modal.classList.add('active');
         }, 1200);
-        
         generateDyadicAdvice(p1Data.answers, p2Data.answers, p1Data.nA, p1Data.nB);
     }
     else if (appMode === 'final') {
         waShareBtn.classList.add('hidden'); // Don't share again
         generateDyadicAdvice(p1Data.answers, p2Data.answers, myName, theirName);
     }
-    
     buildBreakdownUI();
     if (appMode === 'p1') {
         document.getElementById('breakdown-container').classList.remove('hidden');
@@ -906,35 +836,27 @@ async function showResults() {
         document.getElementById('breakdown-container').classList.add('hidden');
     }
 }
-
 function generateDyadicAdvice(ans1, ans2, name1, name2) {
     const advBox = document.getElementById('couples-advice-box');
     advBox.classList.remove('hidden');
-    
     const adviceStrings = translations[currentLang].ui.dyadicAdviceStrings;
-    
     function getAdviceList(ans, targetName, partnerName) {
         let issues = [];
         let minScore = 999;
         let minIdx = 0;
-        
         for(let i=0; i<10; i++) {
             let v = ans[i]; 
             if(questions[i].reverse) v = 6 - v;
-            
             if (v < minScore) { minScore = v; minIdx = i; }
-            
             // If the score is 3 or below (neutral or negative), it's a growth area
             if (v <= 3) {
                 issues.push(adviceStrings[i].replace('{name}', targetName).replace('{partner}', partnerName));
             }
         }
-        
         // If there are no major issues (all 4s and 5s), just give the lowest scoring one
         if (issues.length === 0) {
             issues.push(adviceStrings[minIdx].replace('{name}', targetName).replace('{partner}', partnerName));
         }
-        
         let html = '<ul style="margin-top: 10px; padding-left: 20px;">';
         issues.forEach(issue => {
             html += `<li style="margin-bottom: 8px;">${issue}</li>`;
@@ -942,15 +864,12 @@ function generateDyadicAdvice(ans1, ans2, name1, name2) {
         html += '</ul>';
         return html;
     }
-    
     // Advice for Partner 1 is based on Partner 2's answers (ans2)
     let adv1Html = getAdviceList(ans2, name1, name2);
     // Advice for Partner 2 is based on Partner 1's answers (ans1)
     let adv2Html = getAdviceList(ans1, name2, name1);
-    
     const dyadicItem1 = document.getElementById('dyadic-item-1');
     const dyadicItem2 = document.getElementById('dyadic-item-2');
-    
     if (appMode === 'p2') {
         dyadicItem1.classList.add('hidden');
         dyadicItem2.classList.remove('hidden');
@@ -970,20 +889,15 @@ function generateDyadicAdvice(ans1, ans2, name1, name2) {
         document.getElementById('adv-text2').innerHTML = adv2Html;
     }
 }
-
 function buildBreakdownUI() {
     const bdContainer = document.getElementById('breakdown-container');
     const bdHeader = document.getElementById('bd-header');
-    
     bdContainer.innerHTML = '';
     bdContainer.appendChild(bdHeader);
-    
     const predKeys = ['predCommitment','predAppreciation','predSex','predPartnerSat','predConflict','predResponsiveness','predInvestment','predSupport','predCapitalization','predAttachment'];
-    
     setTimeout(() => {
         for (let i = 0; i < 10; i++) {
             let myAns = 0;
-            
             if (appMode === 'p1') {
                 myAns = answers[i];
             } else if (appMode === 'p2') {
@@ -991,15 +905,12 @@ function buildBreakdownUI() {
             } else if (appMode === 'final') {
                 myAns = p1Data.answers[i];
             }
-            
             if (questions[i].reverse) myAns = 6 - myAns;
             let pct = Math.round(((myAns - 1) / 4) * 100);
-            
             const item = document.createElement('div');
             item.className = 'breakdown-item';
             const titleStr = translations[currentLang].ui[predKeys[i]];
             let color = getColorForPct(pct);
-            
             let html = `
                 <div class="breakdown-header"><span class="bd-title">${titleStr}</span></div>
                 <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:2px; color:#94a3b8;">
@@ -1009,20 +920,17 @@ function buildBreakdownUI() {
                     <div class="bd-bar" style="width: ${pct}%; background: linear-gradient(90deg, ${color.p}, ${color.s});"></div>
                 </div>
             `;
-            
             item.innerHTML = html;
             bdContainer.appendChild(item);
         }
     }, 500);
 }
-
 function getColorForPct(pct) {
     if (pct >= 80) return { p: colorPalettes.high.primary, s: colorPalettes.high.secondary };
     if (pct >= 60) return { p: colorPalettes.mod.primary, s: colorPalettes.mod.secondary };
     if (pct >= 40) return { p: colorPalettes.grow.primary, s: colorPalettes.grow.secondary };
     return { p: colorPalettes.needs.primary, s: colorPalettes.needs.secondary };
 }
-
 function animateScore(targetScore) {
     const finalScoreEl = document.getElementById('final-score');
     const scoreCircle = document.querySelector('.score-circle');
@@ -1034,7 +942,6 @@ function animateScore(targetScore) {
         scoreCircle.style.setProperty('--score', current);
     }, 20);
 }
-
 function restartQuiz() {
     localStorage.removeItem('match_role');
     localStorage.removeItem('match_state');
